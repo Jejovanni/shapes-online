@@ -20,7 +20,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
             <Header />
 
             {/* 2. Main Content Area */}
-            <main className="grow container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <main className="grow ">
                 {children}
             </main>
 
