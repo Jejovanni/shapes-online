@@ -234,7 +234,7 @@ const HeroSection = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {products.map((p, index) => (
               <div key={index} className="bg-gray-800 p-6 rounded-2xl shadow-2xl space-y-4 hover:shadow-emerald-500/20 transition-all duration-300">
-                <image
+                <img
                   src={`https://placehold.co/400x300/1e293b/d1d5db?text=${encodeURIComponent(p.name)}`}
                   alt={p.name}
                   className="w-full h-48 object-cover rounded-xl mb-4 border border-gray-700"
