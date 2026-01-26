@@ -1,5 +1,6 @@
 // Using standard anchor tags (<a>) instead of next/link to resolve environment-specific compilation errors
 import Link from 'next/link';
+import Image from 'next/image';
 import { ShoppingCart, User, Menu } from 'lucide-react';
 
 // Define the navigation links for the marketing area
@@ -13,9 +14,15 @@ export const Header = () => {
     return (
         <header className="sticky top-0 z-50 bg-black text-pink-400 shadow-lg shadow-pink-900/50">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-                {/* Logo/Brand Name */}
-                <Link href="/" className="text-2xl font-extrabold tracking-wider hover:text-pink-300 transition duration-300">
-                    SHAPES ONLINE
+               
+                <Link href="/" className="inline-flex items-center hover:opacity-80 transition duration-300">
+                    <Image
+                        src="/Shapes_logo.png"  // Path relative to /public (replace with your actual filename)
+                        alt="Shapes Online Logo"
+                        width={200}      // Adjust to your logo's desired display width (in pixels)
+                        height={50}      // Adjust to maintain aspect ratio (use your logo's natural ratio)
+                        priority         // Optional: Loads faster since it's above-the-fold (navbar logo)
+                    />
                 </Link>
 
                 {/* Desktop Navigation */}
