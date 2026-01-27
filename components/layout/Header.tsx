@@ -13,7 +13,7 @@ const marketingLinks = [
 export const Header = () => {
     return (
         <header className="sticky top-0 z-50 bg-black text-pink-400 shadow-lg shadow-pink-900/50">
-            <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto flex h-25 items-center justify-between px-4 sm:px-6 lg:px-8">
                
                 <Link href="/" className="inline-flex items-center hover:opacity-80 transition duration-300">
                     <Image
