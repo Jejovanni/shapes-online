@@ -31,7 +31,7 @@ export const Header = () => {
                         <a
                             key={item.name}
                             href={item.href}
-                            className="text-lg font-medium hover:text-pink-100 transition duration-300"
+                            className="text-xl font-medium hover:text-pink-100 transition duration-300"
                         >
                             {item.name}
                         </a>
@@ -40,16 +40,16 @@ export const Header = () => {
 
                 {/* Actions & CTA */}
                 <div className="flex items-center space-x-4">
-                    <a href="/products" className="hidden sm:block px-4 py-1.5 bg-pink-600 text-black font-semibold rounded-full hover:bg-pink-400 transition duration-300 text-sm">
+                    <a href="/products" className="hidden sm:block px-4 py-1.5 bg-pink-600 text-black font-semibold rounded-full hover:bg-pink-400 transition duration-300 text-lg">
                         Shop Now
                     </a>
 
                     <a href="/cart" aria-label="Shopping Cart" className="p-2 hover:bg-pink-900 rounded-full transition duration-300">
-                        <ShoppingCart className="h-6 w-6" />
+                        <ShoppingCart className="h-8 w-8" />
                     </a>
 
                     <a href="/login" aria-label="User Account" className="p-2 hover:bg-pink-900 rounded-full transition duration-300">
-                        <User className="h-6 w-6" />
+                        <User className="h-8 w-8" />
                     </a>
 
                     {/* Mobile Menu Button */}

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Sparkles, Dna, Layers } from 'lucide-react';
+import { ShieldCheck, Target, MessageSquareText } from 'lucide-react';
 
 /**
  * About Us Page Content (route: /about)
@@ -15,11 +15,11 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="text-center mb-16 pt-10">
         <h1 className="text-5xl md:text-6xl font-extrabold text-pink-600 mb-4">
-          Our Story: The Art of Geometry
+          Our Story: The Art of Weight Loss
         </h1>
-        <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-          We are more than just an e-commerce store; we are a dedicated collective built around the beauty and power of abstract design.
-        </p>
+        <h3 className="text-xl text-gray-700 max-w-4xl mx-auto">
+          We aren't just a lifestyle brand, we're dedicated to helping you achieve healthy, sustainable weight loss, and empowering you to live your best life.
+        </h3>
       </section>
 
       {/* Mission & Vision Section */}
@@ -46,10 +46,10 @@ export default function AboutPage() {
             Built on Precision and Passion
           </h2>
           <p className="text-gray-600 mb-4 text-lg">
-            Shapes Online was founded in 2023 by a small team of graphic designers who shared a common frustration: finding high-quality, perfectly rendered vector shapes for their projects was a struggle. We decided to solve that problem ourselves.
+            With roots tracing back to 2015, Shapes Lagos has grown to become the number one weight loss brand on the continent, trusted by thousands for effective, results-driven solutions. Our passion for wellness drives us to keep pushing boundaries, so you can achieve your goals with confidence.
           </p>
           <p className="text-gray-600 text-lg">
-            Our mission is simple: to provide the global creative community with an unparalleled library of geometric assets, abstract backgrounds, and minimal art that is ready-to-use, fully scalable, and commercially licensed.
+            Our mission is simple: YOU MUST LOSE WEIGHT AND SLAY! This is the unshakable ethos behind Shapes Lagos that has allowed us to maintain our unparalleled consistency and quality of service and product for over a decade.
           </p>
         </div>
       </section>
@@ -59,19 +59,19 @@ export default function AboutPage() {
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Our Core Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <ValueCard 
-            icon={<Sparkles className="h-10 w-10 text-pink-600" />}
+            icon={<ShieldCheck className="h-10 w-10 text-pink-600" />}
             title="Uncompromising Quality"
-            description="Every asset is meticulously checked for vector integrity, perfect curves, and clean edges."
+            description="At Shapes Lagos, we stand behind the quality of our products, and every item is meticulously checked to ensure it meets our uncompromising standards for product integrity, so you can trust what you put in your body"
           />
           <ValueCard 
-            icon={<Dna className="h-10 w-10 text-pink-600" />}
-            title="Creative Freedom"
-            description="We offer flexible licensing so you can use our designs for personal and commercial projects without worry."
+            icon={<Target className="h-10 w-10 text-pink-600" />}
+            title="Unfailing Precision"
+            description="At Shapes Lagos, we craft every product with unfailing precision, delivering results you can trust. "
           />
           <ValueCard 
-            icon={<Layers className="h-10 w-10 text-pink-600" />}
+            icon={<MessageSquareText className="h-10 w-10 text-pink-600" />}
             title="Instant Accessibility"
-            description="Digital delivery means no waiting. Download and integrate your new shapes into your workflow immediately."
+            description="At Shapes Lagos, we prioritize instant accessibility, ensuring our team is always ready to address your questions and help troubleshoot any issues, so you get the support you need, fast. "
           />
         </div>
       </section>
@@ -79,7 +79,7 @@ export default function AboutPage() {
       {/* Team/CTA Section */}
       <section className="bg-black text-pink-400 p-10 rounded-2xl shadow-xl border border-pink-700/50 text-center">
         <h2 className="text-3xl font-extrabold mb-4">
-          Join the Geometry Revolution
+          Join the Weight Loss Revolution
         </h2>
         <p className="mb-6 text-gray-300 max-w-2xl mx-auto">
           We believe the best creations start with the perfect shape. Start exploring our collections today and find the precise elements you need.
