@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { Sparkles, Dna, Layers } from 'lucide-react';
 
 /**
@@ -23,16 +24,23 @@ export default function AboutPage() {
 
       {/* Mission & Vision Section */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-gray-100/50 p-8 rounded-3xl shadow-inner border border-gray-200 mb-16">
-        <div className="lg:order-2">
-          {/* Placeholder image for visual appeal */}
-          {/* onError is now permitted because the component is marked "use client" */}
-          <img 
-            src="https://placehold.co/800x600/1F2937/FCA5A5?text=Our+Vision"
-            alt="Abstract geometric art representing the brand's vision"
-            className="rounded-xl shadow-2xl w-full"
-            onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/800x600/4B5563/FFF?text=Vision+Image+Error"; }}
-          />
+        <div className="lg:order-2 w-full">
+          {/* Aspect ratio container to maintain visual consistency */}
+          <div className="relative overflow-hidden rounded-2xl shadow-xl bg-gray-200 aspect-video lg:aspect-square flex items-center justify-center">
+            <img
+              src="/images/Shapes_lagos_About.JPG"
+              alt="Shapes Lagos product line showcasing high-quality vector assets"
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              loading="lazy"
+              // Fallback to placeholder if local image is missing
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.src = "https://placehold.co/800x800/db2777/FFF?text=Shapes+Lagos+Vision";
+              }}
+            />
+          </div>
         </div>
+
         <div className="lg:order-1">
           <h2 className="text-4xl font-bold text-gray-900 mb-6 border-b border-pink-300/50 pb-2">
             Built on Precision and Passion
