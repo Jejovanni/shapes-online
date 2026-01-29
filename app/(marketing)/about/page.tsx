@@ -82,7 +82,7 @@ export default function AboutPage() {
           Join the Weight Loss Revolution
         </h2>
         <p className="mb-6 text-gray-300 max-w-2xl mx-auto">
-          We believe the best creations start with the perfect shape. Start exploring our collections today and find the precise elements you need.
+          We believe the best transformations start with the right balance. Start exploring our weight loss solutions today and find the precise support you need to reach your goals.
         </p>
         <a 
           href="/products" 
