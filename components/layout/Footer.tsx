@@ -3,7 +3,7 @@ import React from 'react';
 export const Footer = () => {
     // Using black for the background (bg-black) and pink for the text (text-pink-400)
     return (
-        <footer className="bg-black text-pink-400 border-t border-pink-900/50 mt-12">
+        <footer className="bg-black text-pink-400 border-t border-pink-900/50">
             <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
                 {/* Top Section: Navigation Links */}

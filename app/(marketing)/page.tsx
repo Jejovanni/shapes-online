@@ -35,8 +35,8 @@ const Button = ({ children, size, variant, className, ...props }) => {
   };
 
   const variantClasses = {
-    default: "bg-emerald-500 text-white hover:bg-emerald-600",
-    outline: "bg-transparent border-2 border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white",
+    default: "bg-pink-500 text-white hover:bg-pink-600",
+    outline: "bg-transparent border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white",
   };
 
   const finalSize = sizeClasses[size || 'lg'];
@@ -56,7 +56,7 @@ const Button = ({ children, size, variant, className, ...props }) => {
  * @param {IconProps} props
  */
 const IconPlaceholder = ({ children, className }) => (
-  <div className={`p-4 rounded-full bg-emerald-500/20 text-emerald-400 ${className || ""}`}>
+  <div className={`p-4 rounded-full bg-pink-500/20 text-pink-400 ${className || ""}`}>
     {children}
   </div>
 );
@@ -81,9 +81,9 @@ const HeroSection = () => {
   ];
 
   const testimonials = [
-    { quote: "Lost 25lbs in 90 days! I feel like a new person.", name: "Sarah K.", image: "https://placehold.co/100x100/34D399/ffffff?text=SK" },
-    { quote: "The energy boost is incredible. Highly recommend!", name: "David L.", image: "https://placehold.co/100x100/34D399/ffffff?text=DL" },
-    { quote: "Finally, a natural formula that actually works.", name: "Jenna P.", image: "https://placehold.co/100x100/34D399/ffffff?text=JP" },
+    { quote: "Lost 25lbs in 90 days! I feel like a new person.", name: "Sarah K.", image: "https://placehold.co/100x100/FF69B4/ffffff?text=SK" },
+    { quote: "The energy boost is incredible. Highly recommend!", name: "David L.", image: "https://placehold.co/100x100/FF69B4/ffffff?text=DL" },
+    { quote: "Finally, a natural formula that actually works.", name: "Jenna P.", image: "https://placehold.co/100x100/FF69B4/ffffff?text=JP" },
   ];
 
   return (
@@ -99,7 +99,7 @@ const HeroSection = () => {
             className="w-full h-full object-cover"
           />
           {/* Tint Overlay: Gradient from dark to slightly lighter to let the image show while keeping text readable */}
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-gray-900/70 to-gray-500/90" />
 
           {/* Optional Accent Glows */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(52,211,153,0.15),transparent_50%)]" />
@@ -109,15 +109,15 @@ const HeroSection = () => {
           <div className="max-w-4xl mx-auto lg:mx-0">
 
             <div className={`space-y-8 transition-all duration-1000 ease-out ${slideInStyle}`}>
-              <div className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-emerald-500/20 backdrop-blur-md rounded-full border border-emerald-500/30">
-                <span className="text-emerald-400 font-semibold text-xs sm:text-sm tracking-widest uppercase">
+              <div className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-pink-500/20 backdrop-blur-md rounded-full border border-pink-500/30">
+                <span className="text-pink-300 font-semibold text-xs sm:text-sm tracking-widest uppercase">
                   #1 Transformation Formula
                 </span>
               </div>
 
               <h1 className="text-4xl sm:text-6xl lg:text-8xl font-extrabold leading-tight tracking-tighter text-white">
                 Transform Your Body in{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-green-500">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-500">
                   90 Days
                 </span>
               </h1>
@@ -130,14 +130,14 @@ const HeroSection = () => {
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
                 <Button
                   size="xl"
-                  className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 shadow-2xl shadow-emerald-500/40 text-lg font-bold"
+                  className="w-full sm:w-auto bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-600 hover:to-pink-700 shadow-2xl shadow-emerald-500/40 text-lg font-bold"
                 >
                   Get Started Now
                 </Button>
                 <Button
                   size="xl"
                   variant="outline"
-                  className="w-full sm:w-auto text-lg font-semibold border-white/30 text-white backdrop-blur-sm hover:bg-white hover:text-gray-900"
+                  className="w-full sm:w-auto text-lg font-semibold border-white/30 text-white backdrop-blur-sm hover:bg-pink hover:text-gray-900"
                 >
                   See Results
                 </Button>
@@ -145,12 +145,12 @@ const HeroSection = () => {
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-6 pt-10">
                 <div className="text-center lg:text-left">
-                  <div className="text-3xl sm:text-4xl font-extrabold text-emerald-400">50K+</div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-pink-400">50K+</div>
                   <div className="text-sm text-gray-300 font-medium">Success Stories</div>
                 </div>
                 <div className="h-10 w-px bg-white/20 hidden sm:block" />
                 <div className="text-center lg:text-left">
-                  <div className="text-3xl sm:text-4xl font-extrabold text-blue-400">4.9★</div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-fuchsia-400">4.9★</div>
                   <div className="text-sm text-gray-300 font-medium">Customer Rating</div>
                 </div>
                 <div className="h-10 w-px bg-white/20 hidden sm:block" />
@@ -205,12 +205,12 @@ const HeroSection = () => {
       {/* 3. TESTIMONIALS SECTION */}
       <section className="py-24 bg-gray-900">
         <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-4">Hear From Our <span className="text-emerald-500">Success Stories</span></h2>
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-4">Hear From Our <span className="text-pink-500">Success Stories</span></h2>
           <p className="text-lg text-center text-gray-400 max-w-2xl mx-auto mb-16">Real results from real people who achieved their body goals in 90 days.</p>
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((t, index) => (
-              <div key={index} className="bg-gray-800 p-8 rounded-2xl shadow-2xl space-y-6 flex flex-col justify-between border-t-4 border-emerald-500/50">
+              <div key={index} className="bg-gray-800 p-8 rounded-2xl shadow-2xl space-y-6 flex flex-col justify-between border-t-4 border-pink-500/50">
                 <p className="text-lg italic text-gray-300">
                   "{t.quote}"
                 </p>
@@ -218,12 +218,12 @@ const HeroSection = () => {
                   <img
                     src={t.image}
                     alt={`Profile of ${t.name}`}
-                    className="w-14 h-14 rounded-full object-cover ring-2 ring-emerald-500"
+                    className="w-14 h-14 rounded-full object-cover ring-2 ring-pink-500"
                     onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "https://placehold.co/100x100/34D399/ffffff?text=User"; }}
                   />
                   <div>
                     <p className="font-semibold text-white">{t.name}</p>
-                    <p className="text-sm text-emerald-400">Verified Buyer</p>
+                    <p className="text-sm text-pink-400">Verified Buyer</p>
                   </div>
                 </div>
               </div>
@@ -240,14 +240,14 @@ const HeroSection = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {products.map((p, index) => (
-              <div key={index} className="bg-gray-800 p-6 rounded-2xl shadow-2xl space-y-4 hover:shadow-emerald-500/20 transition-all duration-300">
+              <div key={index} className="bg-gray-800 p-6 rounded-2xl shadow-2xl space-y-4 hover:shadow-pink-500/20 transition-all duration-300">
                 <img
                   src={`https://placehold.co/400x300/1e293b/d1d5db?text=${encodeURIComponent(p.name)}`}
                   alt={p.name}
                   className="w-full h-48 object-cover rounded-xl mb-4 border border-gray-700"
                 />
                 <h3 className="text-2xl font-bold text-white">{p.name}</h3>
-                <p className="text-emerald-400 text-3xl font-extrabold">{p.price}</p>
+                <p className="text-pink-400 text-3xl font-extrabold">{p.price}</p>
                 <p className="text-gray-400">{p.description}</p>
                 <Button className="w-full mt-4 bg-emerald-600 hover:bg-emerald-700">
                   Add to Cart
@@ -259,18 +259,18 @@ const HeroSection = () => {
       </section>
 
       {/* 5. FINAL CTA SECTION */}
-      <section className="py-24 bg-gray-900">
+      <section className="py-24 bg-gray-900 ">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="bg-gray-800 p-8 sm:p-16 rounded-3xl text-center border-t-8 border-emerald-500 shadow-3xl">
+          <div className="bg-gray-800 p-8 sm:p-16 rounded-3xl text-center border-t-8 border-pink-500 shadow-3xl">
             <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
-              Ready to See Your <span className="bg-gradient-to-r from-emerald-400 to-green-600 bg-clip-text text-transparent">90-Day Transformation</span>?
+              Ready to See Your <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">90-Day Transformation</span>?
             </h2>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-10">
               Stop waiting for change. Start your journey today and join over 50,000 satisfied customers.
             </p>
             <Button
               size="xl"
-              className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 shadow-2xl shadow-emerald-500/40 text-lg font-bold transition-transform duration-300 hover:scale-[1.03]"
+              className="w-full sm:w-auto bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-600 hover:to-pink-700 shadow-2xl shadow-pink-500/40 text-lg font-bold transition-transform duration-300 hover:scale-[1.03]"
             >
               Secure Your 90-Day Kit Now
             </Button>
