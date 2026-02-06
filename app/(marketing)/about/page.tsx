@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { ReactNode } from 'react'; // This line is the fix
 import Image from 'next/image';
 import { ShieldCheck, Target, MessageSquareText } from 'lucide-react';
 
