@@ -1,7 +1,8 @@
 "use client";
 
 import React from 'react';
-import { Lock, Shapes } from 'lucide-react';
+import Image from 'next/image';
+import { Lock } from 'lucide-react';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -10,8 +11,22 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
                 {/* Logo/Header Area */}
                 <div className="flex flex-col items-center justify-center space-y-3 mb-8">
-                    <div className="p-3 bg-pink-600 rounded-full shadow-lg">
-                        <Shapes className="h-8 w-8 text-white" />
+                    <div className="p-3 bg-gray-600 rounded-full shadow-lg">
+                      <Image
+                        src="/Shapes_logo.png"  // Path relative to /public (replace with your actual filename)
+                        alt="Shapes Online Logo"
+                        width={200}      // Adjust to your logo's desired display width (in pixels)
+                        height={50}      // Adjust to maintain aspect ratio (use your logo's natural ratio)
+                        priority         // Optional: Loads faster since it's above-the-fold (navbar logo)
+                        className="w-[150px] md:w-[200px] h-auto"
+                        // onError={(e) => {
+                        //     const img = e.target as HTMLImageElement;
+                        //     img.style.display = 'none';
+                        //     const fallback = img.nextSibling as HTMLElement;
+                        //     if (fallback) fallback.style.display = 'block';
+                        // }}
+                    />
+
                     </div>
                     <h2 className="text-center text-3xl font-extrabold text-gray-900">
                         Sign in to your account

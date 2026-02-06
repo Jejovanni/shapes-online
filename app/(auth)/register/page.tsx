@@ -3,19 +3,70 @@
 import React, { useState } from 'react';
 import { Mail, Lock, UserPlus } from 'lucide-react';
 
+/**
+ * Reusable Auth Button Component
+ * Consolidated into this file to resolve import issues.
+ */
+const AuthButton = ({ 
+  loading, 
+  text, 
+  icon, 
+  onClick, 
+  type = "submit" 
+}) => {
+  return (
+    <div className="w-full">
+      <button
+        type={type}
+        disabled={loading}
+        onClick={onClick}
+        className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition duration-150 disabled:bg-pink-400 disabled:cursor-not-allowed min-h-[40px]"
+      >
+        {loading ? (
+          <svg 
+            className="animate-spin h-5 w-5 text-white" 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24"
+          >
+            <circle 
+              className="opacity-25" 
+              cx="12" 
+              cy="12" 
+              r="10" 
+              stroke="currentColor" 
+              strokeWidth="4"
+            ></circle>
+            <path 
+              className="opacity-75" 
+              fill="currentColor" 
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        ) : (
+          <span className='flex items-center gap-2'>
+            {icon}
+            {text}
+          </span>
+        )}
+      </button>
+    </div>
+  );
+};
+
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
 
         if (password !== confirmPassword) {
             setLoading(false);
-            alert('Registration failed: Passwords do not match. (Mock)');
+            console.warn('Registration failed: Passwords do not match.');
             return;
         }
 
@@ -24,13 +75,10 @@ export default function RegisterPage() {
 
         setTimeout(() => {
             setLoading(false);
-            // Mock successful registration logic
             if (email && password.length >= 6) {
-                alert('Registration successful! Redirecting to login... (Mock)');
-                // In a real app: router.push('/login');
-                // window.location.href = '/login';
+                console.log('Registration successful! Redirecting...');
             } else {
-                alert('Registration failed: Please check your input. (Mock)');
+                console.error('Registration failed: Please check your input.');
             }
         }, 1500);
         // --- End Placeholder ---
@@ -108,26 +156,12 @@ export default function RegisterPage() {
                     </div>
                 </div>
 
-                {/* Submit Button */}
-                <div>
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition duration-150 disabled:bg-pink-400 disabled:cursor-not-allowed"
-                    >
-                        {loading ? (
-                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                        ) : (
-                            <span className='flex items-center gap-2'>
-                                <UserPlus className='h-5 w-5' />
-                                Register Account
-                            </span>
-                        )}
-                    </button>
-                </div>
+                {/* Refactored Submit Button using local AuthButton component */}
+                <AuthButton 
+                    loading={loading}
+                    text="Register Account"
+                    icon={<UserPlus className="h-5 w-5" />}
+                />
             </form>
 
             {/* Login Link */}

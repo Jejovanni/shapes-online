@@ -1,16 +1,15 @@
 "use client";
 
 import React from 'react';
+import {ProductCards} from '@/components/product/ProductCards';
 
 // --- Mock Data for the Catalog ---
 
 const MOCK_PRODUCTS = [
-    { id: 'neo-prism', title: 'Neo-Prism Set', price: 29.99, image: 'https://placehold.co/400x400/F472B6/111?text=Neo+Prism' },
-    { id: 'abstract-flow', title: 'Abstract Flow Pack V2', price: 49.99, image: 'https://placehold.co/400x400/93C5FD/111?text=Flow+Pack' },
-    { id: 'sphere-kit', title: 'Gradient Sphere Kit', price: 34.99, image: 'https://placehold.co/400x400/FDBA74/111?text=Sphere+Kit' },
-    { id: 'minimalist-lines', title: 'Minimalist Lines', price: 14.99, image: 'https://placehold.co/400x400/6EE7B7/111?text=Minimal+Lines' },
-    { id: 'cyber-grids', title: 'Cyber Grids Vol. 1', price: 39.99, image: 'https://placehold.co/400x400/7C3AED/111?text=Cyber+Grids' },
-    { id: 'liquid-blobs', title: 'Liquid Blobs Collection', price: 24.99, image: 'https://placehold.co/400x400/FFD43B/111?text=Liquid+Blobs' },
+    { id: 'neo-prism', title: 'Premium Kit', price: 29.99, image: 'images/IMG-20251029-WA0002.jpg' },
+    { id: 'abstract-flow', title: 'VVIP Kit with Coffee & Protein Shake', price: 49.99, image: 'images/IMG-20251030-WA0001.jpg' },
+    { id: 'sphere-kit', title: 'VVIP Kit with Coffee', price: 34.99, image: 'images/IMG-20251030-WA0002.jpg' },
+    { id: 'minimalist-lines', title: 'Signature Kit', price: 140000, image: 'images/IMG-20251030-WA0003.jpg' },
 ];
 
 // --- Minimal Product Card Component (for runnability) ---
@@ -51,8 +50,8 @@ export default function ProductsCatalogPage() {
 
             {/* Page Header */}
             <header className="text-center py-6 border-b border-gray-200">
-                <h1 className="text-4xl font-extrabold text-pink-600">All Shapes & Vector Packs</h1>
-                <p className="text-lg text-gray-500 mt-2">Browse the complete collection of geometric designs.</p>
+                <h1 className="text-4xl font-extrabold text-pink-600">All Shapes Lagos Kits</h1>
+                <p className="text-lg text-gray-500 mt-2">Browse the complete collection weight loss kits.</p>
             </header>
 
             {/* Filters/Sort (Placeholder) */}
@@ -68,6 +67,7 @@ export default function ProductsCatalogPage() {
                     </select>
                 </div>
             </div>
+            <ProductCards />
 
             {/* Product Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">

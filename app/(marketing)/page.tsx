@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 // --- START: TYPE DEFINITIONS (for JSDoc to avoid implicit 'any' errors) ---
 
@@ -74,6 +75,9 @@ const HeroSection = () => {
     ? "opacity-100 translate-y-0"
     : "opacity-0 translate-y-8";
 
+    const [selectedProduct, setSelectedProduct] = useState<any>(null);
+    const [cartCount, setCartCount] = useState(0);
+
   const products = [
     { name: "Metabolic Boost", price: "$49", description: "Accelerate fat loss with natural thermogenic compounds." },
     { name: "Night Detox", price: "$35", description: "Cleanse and repair while you sleep for a fresh start." },
@@ -128,12 +132,14 @@ const HeroSection = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
+                <Link href="/login" passHref>
                 <Button
                   size="xl"
                   className="w-full sm:w-auto bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-600 hover:to-pink-700 shadow-2xl shadow-emerald-500/40 text-lg font-bold"
                 >
                   Get Started Now
                 </Button>
+                </Link>
                 <Button
                   size="xl"
                   variant="outline"
@@ -232,30 +238,113 @@ const HeroSection = () => {
         </div>
       </section>
 
-      {/* 4. FEATURED PRODUCTS SECTION */}
+     {/* 4. SHOP PRODUCTS SECTION */}
       <section className="py-24 bg-gray-950">
         <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-4">Our <span className="text-pink-500">Featured</span> Products</h2>
-          <p className="text-lg text-center text-gray-400 max-w-2xl mx-auto mb-16">Complement your transformation with our best-selling natural supplements.</p>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+            <div className="text-left">
+              <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">
+                Shop Our <span className="text-pink-500">Supplements</span>
+              </h2>
+              <p className="text-lg text-gray-400 max-w-2xl">
+                Premium, natural solutions tailored for your 90-day transformation journey.
+              </p>
+            </div>
+            <Link href="/cart" className="text-pink-400 hover:text-pink-300 font-bold flex items-center gap-2 bg-pink-500/10 px-4 py-2 rounded-lg">
+              View Cart ({cartCount})
+            </Link>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {products.map((p, index) => (
-              <div key={index} className="bg-gray-800 p-6 rounded-2xl shadow-2xl space-y-4 hover:shadow-pink-500/20 transition-all duration-300">
-                <img
-                  src={`https://placehold.co/400x300/1e293b/d1d5db?text=${encodeURIComponent(p.name)}`}
-                  alt={p.name}
-                  className="w-full h-48 object-cover rounded-xl mb-4 border border-gray-700"
-                />
-                <h3 className="text-2xl font-bold text-white">{p.name}</h3>
-                <p className="text-pink-400 text-3xl font-extrabold">{p.price}</p>
-                <p className="text-gray-400">{p.description}</p>
-                <Button className="w-full mt-4 bg-emerald-600 hover:bg-emerald-700">
-                  Add to Cart
-                </Button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { id: 1, name: "Metabolic Boost", price: "₦45,000", description: "Accelerate fat loss with natural thermogenic compounds designed for peak daytime performance. Contains Green Tea Extract and Caffeine.", img: "images/IMG-20251030-WA0002.jpg" },
+              { id: 2, name: "Night Detox", price: "₦32,500", description: "Cleanse and repair while you sleep for a fresh start. Gentle on the stomach, tough on toxins. 100% herbal.", img: "images/IMG-20251030-WA0002.jpg" },
+              { id: 3, name: "Essential Daily", price: "₦25,000", description: "Comprehensive vitamins and minerals for optimal health and immune system support. 30-day supply.", img: "images/IMG-20251030-WA0002.jpg" },
+              { id: 4, name: "Lean Protein", price: "₦55,000", description: "High-quality plant-based protein to help build and maintain lean muscle mass during your journey.", img: "images/IMG-20251030-WA0002.jpg" },
+            ].map((p) => (
+              <div key={p.id} className="group bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-pink-500/50 transition-all duration-300 flex flex-col h-full">
+                <div className="relative aspect-square overflow-hidden bg-gray-800">
+                  <img src={p.img} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <button 
+                    onClick={() => setSelectedProduct(p)}
+                    className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold backdrop-blur-sm"
+                  >
+                    Quick View
+                  </button>
+                </div>
+
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold text-white mb-2 truncate">{p.name}</h3>
+                  <p className="text-pink-400 text-2xl font-black mb-3">{p.price}</p>
+                  <p className="text-gray-400 text-sm line-clamp-2 mb-6 flex-grow">{p.description}</p>
+                  
+                  <button 
+                    onClick={() => {
+                          // 1. Get existing cart from localStorage or just increment
+                          const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
+                          const newCart = [...currentCart, p];
+                          localStorage.setItem('cart', JSON.stringify(newCart));
+
+                          // 2. Dispatch a custom event to tell the Header to update
+                          window.dispatchEvent(new Event('cartUpdated'));
+                          
+                          // Optional: Keep your local state if you want the "View Cart (0)" 
+                          // text in the shop section to update too
+                          setCartCount(newCart.length);
+                        }}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all active:scale-95"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </div>
+
+        {/* --- QUICK VIEW MODAL --- */}
+        {selectedProduct && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+            <div className="bg-gray-900 border border-gray-800 w-full max-w-3xl rounded-3xl overflow-hidden relative flex flex-col md:flex-row">
+              <button 
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-4 right-4 z-10 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-500 transition-colors"
+              >
+                ✕
+              </button>
+              
+              <div className="w-full md:w-1/2 aspect-square">
+                <img src={selectedProduct.img} alt={selectedProduct.name} className="w-full h-full object-cover" />
+              </div>
+
+              <div className="p-8 md:w-1/2 flex flex-col justify-center">
+                <span className="text-pink-500 font-bold tracking-widest text-xs uppercase mb-2">In Stock</span>
+                <h2 className="text-3xl font-black text-white mb-2">{selectedProduct.name}</h2>
+                <p className="text-2xl font-bold text-emerald-400 mb-4">{selectedProduct.price}</p>
+                <p className="text-gray-400 mb-8 leading-relaxed">
+                  {selectedProduct.description}
+                </p>
+                
+                <div className="space-y-3">
+                  <Link href="/cart" className="block w-full">
+                    <Button 
+                      onClick={() => setCartCount(prev => prev + 1)}
+                      className="w-full bg-pink-500 hover:bg-pink-600"
+                    >
+                      Add to Cart & Checkout
+                    </Button>
+                  </Link>
+                  <button 
+                    onClick={() => setSelectedProduct(null)}
+                    className="w-full text-gray-500 hover:text-white text-sm font-medium transition-colors"
+                  >
+                    Continue Shopping
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* 5. FINAL CTA SECTION */}

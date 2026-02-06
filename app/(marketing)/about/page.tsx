@@ -4,6 +4,12 @@ import React from 'react';
 import Image from 'next/image';
 import { ShieldCheck, Target, MessageSquareText } from 'lucide-react';
 
+interface ValueCardProps {
+  icon: ReactNode;
+  title: string;
+  description: string;
+}
+
 /**
  * About Us Page Content (route: /about)
  * This content will be rendered inside the Marketing Layout.
@@ -97,7 +103,7 @@ export default function AboutPage() {
 }
 
 // Helper Component for Core Values
-const ValueCard = ({ icon, title, description }) => (
+const ValueCard = ({ icon, title, description }: ValueCardProps) => (
   <div className="p-6 border border-gray-200 rounded-xl bg-white shadow-md">
     <div className="flex justify-center mb-4">{icon}</div>
     <h3 className="text-xl font-bold mb-2 text-gray-800">{title}</h3>
