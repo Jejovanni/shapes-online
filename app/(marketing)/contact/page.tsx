@@ -1,12 +1,19 @@
 "use client";
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 /**
- * Contact Us Page Content (route: /contact)
- * This content will be rendered inside the Marketing Layout.
+ * Props for the ContactDetail component
  */
+interface ContactDetailProps {
+  icon: ReactNode;
+  title: string;
+  contact: ReactNode | string;
+}
+
+
+
 export default function ContactPage() {
   
   // Note: Form handlers are removed as the form was replaced by a direct link.
@@ -78,7 +85,7 @@ export default function ContactPage() {
 }
 
 // Helper Component for Contact Details
-const ContactDetail = ({ icon, title, content, link }) => (
+const ContactDetail = ({ icon, title, contact }: ContactDetailProps) => (
   <div className="flex items-start space-x-4">
     <div className="flex-shrink-0 text-pink-600">{icon}</div>
     <div>
