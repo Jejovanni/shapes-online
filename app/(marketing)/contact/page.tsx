@@ -9,7 +9,8 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 interface ContactDetailProps {
   icon: ReactNode;
   title: string;
-  contact: ReactNode | string;
+  content: string; // Changed from 'contact' to 'content' to match your usage
+  link: string;    // Added missing 'link' property
 }
 
 
@@ -27,7 +28,7 @@ export default function ContactPage() {
           Get in Touch
         </h1>
         <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-          We're here to help you with orders, design questions, or custom requests.
+          We&apos;re here to help you with orders, design questions, or custom requests.
         </p>
       </section>
 
@@ -85,7 +86,7 @@ export default function ContactPage() {
 }
 
 // Helper Component for Contact Details
-const ContactDetail = ({ icon, title, contact }: ContactDetailProps) => (
+const ContactDetail = ({ icon, title, content, link }: ContactDetailProps) => (
   <div className="flex items-start space-x-4">
     <div className="flex-shrink-0 text-pink-600">{icon}</div>
     <div>

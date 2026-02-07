@@ -161,8 +161,11 @@ export default function CheckoutPage() {
                                                     src={item.image}
                                                     alt={item.title}
                                                     className="h-full w-full object-cover object-center"
-                                                    onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/D1D5DB/4B5563?text=Img"; }}
-                                                />
+                                                    onError={(e) => {
+                                                        const target = e.target as HTMLImageElement;
+                                                        target.onerror = null;
+                                                        target.src = "https://placehold.co/80x80/D1D5DB/4B5563?text=Img";
+                                                    }}                                                />
                                             </div>
                                             <div className="flex flex-1 flex-col">
                                                 <div>

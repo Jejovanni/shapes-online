@@ -82,7 +82,7 @@ export const Header = () => {
 
                 {/* Actions & CTA */}
                 <div className="flex items-center space-x-2 sm:space-x-4">
-                    <Link href="/products" className="hidden sm:block px-4 py-1.5 bg-pink-600 text-black font-semibold rounded-full hover:bg-pink-400 transition duration-300 text-base">
+                    <Link href="#shop" className="hidden sm:block px-4 py-1.5 bg-pink-600 text-black font-semibold rounded-full hover:bg-pink-400 transition duration-300 text-base">
                         Shop Now
                     </Link>
 
