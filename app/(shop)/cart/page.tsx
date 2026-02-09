@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
+import { Trash2, ShoppingBag, ArrowRight, Minus, Plus } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-// Define the Product interface to match your Shop section
+// Updated interface to include quantity
 interface Product {
     id: number;
     name: string;
     price: string;
     description: string;
     img: string;
+    quantity?: number; // Added quantity property
 }
 
 const CartPage = () => {
@@ -31,28 +32,41 @@ const CartPage = () => {
         setIsHydrated(true);
     }, []);
 
-    // 2. Remove item logic
+    // 2. Quantity Change logic
+    const updateQuantity = (index: number, delta: number) => {
+        const updatedCart = [...cartItems];
+        const currentQty = updatedCart[index].quantity || 1;
+        const newQty = currentQty + delta;
+
+        if (newQty >= 1) {
+            updatedCart[index] = { ...updatedCart[index], quantity: newQty };
+            setCartItems(updatedCart);
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+            window.dispatchEvent(new Event('cartUpdated'));
+        }
+    };
+
+    // 3. Remove item logic
     const removeItem = (indexToRemove: number) => {
         const newCart = cartItems.filter((_, index) => index !== indexToRemove);
         setCartItems(newCart);
         localStorage.setItem('cart', JSON.stringify(newCart));
-        // Trigger event for Header/Navbar count
         window.dispatchEvent(new Event('cartUpdated'));
     };
 
-    // 3. Calculation Logic
+    // 4. Calculation Logic (Updated to account for quantity)
     const subtotal = cartItems.reduce((acc, item) => {
-        // Strips ₦ and commas to calculate
         const price = parseInt(item.price.replace(/[^\d]/g, "")) || 0;
-        return acc + price;
+        const qty = item.quantity || 1;
+        return acc + (price * qty);
     }, 0);
+
 
     const deliveryFee = cartItems.length > 0 ? 2500 : 0;
     const total = subtotal + deliveryFee;
 
-    // Prevent hydration mismatch (don't render cart until client-side)
     if (!isHydrated) return null;
-    // bg - gray - 950
+
     return (
         <div className="min-h-screen font-sans pt-24 pb-12">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +78,6 @@ const CartPage = () => {
                 </div>
 
                 {cartItems.length === 0 ? (
-                    /* EMPTY STATE */
                     <div className="bg-gray-900 rounded-3xl p-12 text-center border border-gray-800 shadow-2xl">
                         <div className="bg-gray-800 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                             <ShoppingBag className="h-10 w-10 text-gray-500" />
@@ -82,9 +95,7 @@ const CartPage = () => {
                         </Link>
                     </div>
                 ) : (
-                    /* CART CONTENT */
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                        {/* Items List */}
                         <div className="lg:col-span-2 space-y-6">
                             {cartItems.map((item, index) => (
                                 <div
@@ -104,8 +115,31 @@ const CartPage = () => {
                                         <h3 className="text-xl font-bold text-white">{item.name}</h3>
                                         <p className="text-gray-400 text-sm line-clamp-1">{item.description}</p>
                                     </div>
+
+                                    {/* QUANTITY TOGGLE */}
+                                    <div className="flex items-center space-x-4 bg-gray-800/50 p-2 rounded-xl border border-gray-700">
+                                        <button
+                                            onClick={() => updateQuantity(index, -1)}
+                                            className="p-1 text-gray-400 hover:text-pink-500 transition-colors disabled:opacity-30"
+                                            disabled={(item.quantity || 1) <= 1}
+                                        >
+                                            <Minus className="h-5 w-5" />
+                                        </button>
+                                        <span className="text-white font-bold w-6 text-center">
+                                            {item.quantity || 1}
+                                        </span>
+                                        <button
+                                            onClick={() => updateQuantity(index, 1)}
+                                            className="p-1 text-gray-400 hover:text-pink-500 transition-colors"
+                                        >
+                                            <Plus className="h-5 w-5" />
+                                        </button>
+                                    </div>
+
                                     <div className="text-center sm:text-right flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto space-x-4 sm:space-x-0">
-                                        <span className="text-xl font-black text-pink-500">{item.price}</span>
+                                        <span className="text-xl font-black text-pink-500">
+                                            ₦{((parseInt(item.price.replace(/[^\d]/g, "")) || 0) * (item.quantity || 1)).toLocaleString()}
+                                        </span>
                                         <button
                                             onClick={() => removeItem(index)}
                                             className="p-2 text-gray-500 hover:text-red-500 transition-colors rounded-lg hover:bg-red-500/10"
@@ -117,7 +151,6 @@ const CartPage = () => {
                             ))}
                         </div>
 
-                        {/* Summary Sidebar */}
                         <div className="lg:col-span-1">
                             <div className="bg-gray-900 rounded-3xl p-8 border border-gray-800 sticky top-28 shadow-2xl">
                                 <h2 className="text-2xl text-white font-bold mb-6 border-b border-gray-800 pb-4">Order Summary</h2>
@@ -138,9 +171,10 @@ const CartPage = () => {
                                     </div>
                                 </div>
 
-                                <Link 
-                                href="/checkout" 
-                                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-6 px-10 rounded-xl shadow-lg shadow-emerald-900/20 transition-all transform active:scale-95 mb-4">
+                                <Link
+                                    href="/checkout"
+                                    className="w-full inline-block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-6 px-10 rounded-xl shadow-lg shadow-emerald-900/20 transition-all transform active:scale-95 mb-4"
+                                >
                                     Proceed to Checkout
                                 </Link>
 
