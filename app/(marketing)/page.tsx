@@ -78,10 +78,10 @@ const HeroSection = () => {
   }, []);
 
   const products: Product[] = [
-    { id: 1, name: "Metabolic Boost", price: "₦45,000", description: "Accelerate fat loss with natural thermogenic compounds designed for peak daytime performance.", img: "images/IMG-20251030-WA0002.jpg" },
-    { id: 2, name: "Night Detox", price: "₦32,500", description: "Cleanse and repair while you sleep for a fresh start. Gentle on the stomach, tough on toxins.", img: "images/IMG-20251030-WA0002.jpg" },
-    { id: 3, name: "Essential Daily", price: "₦25,000", description: "Comprehensive vitamins and minerals for optimal health and immune system support.", img: "images/IMG-20251030-WA0002.jpg" },
-    { id: 4, name: "Lean Protein", price: "₦55,000", description: "High-quality plant-based protein to help build and maintain lean muscle mass.", img: "images/IMG-20251030-WA0002.jpg" },
+    { id: 1, name: "Shapes Lagos Premium kit", price: "₦415,000", description: "The 90 days total weightloss wellness plan, the top of our product line.", img: "images/IMG-20251029-WA0002.jpg" },
+    { id: 2, name: "Shapes Lagos Signature Kit", price: "₦140,000", description: "Contains the new and improved Bum & slim tea. All natural ingredients.", img: "images/IMG-20251030-WA0003.jpg" },
+    { id: 3, name: "VVIP Kit with Coffee & Protein Shake", price: "₦116,000", description: "Contains a comprehensive weightloss regimen including the skinny coffee and protein shake for healthy nutrition.", img: "images/IMG-20251030-WA0001.jpg" },
+    { id: 4, name: "VVIP Kit with Coffee", price: "₦95,000", description: "High-quality plant-based products to blast tummy fat.", img: "images/IMG-20251030-WA0002.jpg" },
   ];
 
   const testimonials = [
