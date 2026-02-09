@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, ReactNode, ButtonHTMLAttributes } from 'react';
 import Link from 'next/link';
+import Image from 'next/image'
 
 // --- TYPES ---
 
@@ -78,10 +79,10 @@ const HeroSection = () => {
   }, []);
 
   const products: Product[] = [
-    { id: 1, name: "Shapes Lagos Premium kit", price: "₦415,000", description: "The 90 days total weightloss wellness plan, the top of our product line.", img: "images/IMG-20251029-WA0002.jpg" },
-    { id: 2, name: "Shapes Lagos Signature Kit", price: "₦140,000", description: "Contains the new and improved Bum & slim tea. All natural ingredients.", img: "images/IMG-20251030-WA0003.jpg" },
-    { id: 3, name: "VVIP Kit with Coffee & Protein Shake", price: "₦116,000", description: "Contains a comprehensive weightloss regimen including the skinny coffee and protein shake for healthy nutrition.", img: "images/IMG-20251030-WA0001.jpg" },
-    { id: 4, name: "VVIP Kit with Coffee", price: "₦95,000", description: "High-quality plant-based products to blast tummy fat.", img: "images/IMG-20251030-WA0002.jpg" },
+    { id: 1, name: "Shapes Lagos Premium kit", price: "₦415,000", description: "The 90 days total weightloss wellness plan, the top of our product line.", img: "/images/IMG-20251029-WA0002.jpg" },
+    { id: 2, name: "Shapes Lagos Signature Kit", price: "₦140,000", description: "Contains the new and improved Bum & slim tea. All natural ingredients.", img: "/images/IMG-20251030-WA0003.jpg" },
+    { id: 3, name: "VVIP Kit with Coffee & Protein Shake", price: "₦116,000", description: "Contains a comprehensive weightloss regimen including the skinny coffee and protein shake for healthy nutrition.", img: "/images/IMG-20251030-WA0001.jpg" },
+    { id: 4, name: "VVIP Kit with Coffee", price: "₦95,000", description: "High-quality plant-based products to blast tummy fat.", img: "/images/IMG-20251030-WA0002.jpg" },
   ];
 
   const testimonials = [
@@ -95,11 +96,16 @@ const HeroSection = () => {
       {/* 1. HERO SECTION */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="images/Shapes_Banner2.jpeg"
+          <Image
+            src="/images/Shapes_Banner2.jpeg"
             alt="Hero Background"
-            className="w-full h-full object-cover"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+            quality={90}
           />
+          {/* Gradient Overlay remains the same */}
           <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-gray-900/70 to-gray-500/90" />
         </div>
 
@@ -181,9 +187,20 @@ const HeroSection = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {products.map((p) => (
               <div key={p.id} className="group bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-pink-500/50 transition-all duration-300 flex flex-col h-full">
-                <div className="relative aspect-square overflow-hidden bg-gray-800">
-                  <img src={p.img} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                  <button onClick={() => setSelectedProduct(p)} className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold backdrop-blur-sm">
+                <div className="relative aspect-square overflow-hidden bg-gray-800 group">
+                  <Image
+                    src={p.img}
+                    alt={p.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+
+                  {/* The Quick View button stays absolute to sit on top of the Image */}
+                  <button
+                    onClick={() => setSelectedProduct(p)}
+                    className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold backdrop-blur-sm z-10"
+                  >
                     Quick View
                   </button>
                 </div>
