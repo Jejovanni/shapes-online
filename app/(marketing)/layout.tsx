@@ -2,7 +2,6 @@
 // to resolve the "Could not resolve" error in the environment.
 
 import { Header } from '@/components/layout/Header';
-// import { Header } from '../components/layout/Header';
 import { Footer } from '../../components/layout/Footer';
 import React from 'react';
 

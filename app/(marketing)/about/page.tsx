@@ -32,17 +32,14 @@ export default function AboutPage() {
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-gray-100/50 p-8 rounded-3xl shadow-inner border border-gray-200 mb-16">
         <div className="lg:order-2 w-full">
           {/* Aspect ratio container to maintain visual consistency */}
-          <div className="relative overflow-hidden rounded-2xl shadow-xl bg-gray-200 aspect-video lg:aspect-square flex items-center justify-center">
-            <img
+          <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-xl bg-gray-200 aspect-video lg:aspect-square flex items-center justify-center">
+            <Image
               src="/images/Shapes_lagos_About.JPG"
               alt="Shapes Lagos product line showcasing high-quality vector assets"
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-              loading="lazy"
-              // Fallback to placeholder if local image is missing
-              onError={(e) => {
-                const target = e.currentTarget;
-                target.src = "https://placehold.co/800x800/db2777/FFF?text=Shapes+Lagos+Vision";
-              }}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 hover:scale-105"
+              priority={true} // Set to true if this is "above the fold" (top of the page)
             />
           </div>
         </div>

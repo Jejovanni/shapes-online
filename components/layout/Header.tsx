@@ -82,7 +82,7 @@ export const Header = () => {
 
                 {/* Actions & CTA */}
                 <div className="flex items-center space-x-2 sm:space-x-4">
-                    <Link href="#shop" className="hidden sm:block px-4 py-1.5 bg-pink-600 text-black font-semibold rounded-full hover:bg-pink-400 transition duration-300 text-base">
+                    <Link href="/#shop" className="hidden sm:block px-4 py-1.5 bg-pink-600 text-black font-semibold rounded-full hover:bg-pink-400 transition duration-300 text-base">
                         Shop Now
                     </Link>
 
@@ -151,7 +151,7 @@ export const Header = () => {
 
                     <div className="mt-auto border-t border-pink-900/20 pt-8">
                         <Link 
-                            href="/products" 
+                            href="/#shop" 
                             className="flex justify-center w-full py-4 bg-pink-600 text-black font-black rounded-xl text-xl uppercase tracking-tighter"
                             onClick={() => setIsDrawerOpen(false)}
                         >

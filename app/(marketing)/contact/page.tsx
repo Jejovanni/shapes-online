@@ -43,7 +43,7 @@ export default function ContactPage() {
             Chat with our sales and support team directly on WhatsApp for the fastest response to your questions about orders, products, or custom shapes.
           </p>
           <a
-            href="https://wa.me/15551234567" // Placeholder WhatsApp link (replace with your actual number, e.g., 18885557427)
+            href="https://wa.me/+2348163114858" // Placeholder WhatsApp link (replace with your actual number, e.g., 18885557427)
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center space-x-3 px-8 py-3 bg-green-500 text-white font-bold text-lg rounded-full shadow-lg hover:bg-green-600 transition duration-300 transform hover:scale-105"
@@ -62,12 +62,12 @@ export default function ContactPage() {
           <h2 className="text-3xl font-bold text-pink-500 mb-4">Contact Details</h2>
           
           <ContactDetail icon={<Mail className="h-6 w-6" />} title="Email Support" content="support@shapesonline.com" link="mailto:support@shapesonline.com" />
-          <ContactDetail icon={<Phone className="h-6 w-6" />} title="Sales Line" content="(888) 555-SHAPES" link="tel:+18885557427" />
+          <ContactDetail icon={<Phone className="h-6 w-6" />} title="Sales Line" content="+2348163114858" link="tel:+2348163114858" />
           <ContactDetail icon={<MapPin className="h-6 w-6" />} title="Studio Location" content="123 Vector Lane, Design City" link="#" />
           
           <div className="pt-4">
             <h3 className="text-xl font-semibold text-pink-500 mb-3">Operating Hours</h3>
-            <p className="text-gray-300">Monday - Friday: 9am - 5pm EST</p>
+            <p className="text-gray-300">Monday - Friday: 9am - 5pm WAT</p>
             <p className="text-gray-300">Weekends: Closed</p>
           </div>
         </div>
