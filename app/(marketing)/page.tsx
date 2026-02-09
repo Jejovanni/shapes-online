@@ -211,7 +211,19 @@ const HeroSection = () => {
                   <button
                     onClick={() => {
                       const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
-                      const newCart = [...currentCart, p];
+
+                      // Check if item already exists in cart
+                      const existingItemIndex = currentCart.findIndex((item: any) => item.id === p.id);
+                      let newCart;
+
+                      if (existingItemIndex > -1) {
+                        // Option A: If item exists, do nothing (or show a message "Already in cart")
+                        newCart = currentCart;
+                      } else {
+                        // Option B: Add new item with a default quantity of 1
+                        newCart = [...currentCart, { ...p, quantity: 1 }];
+                      }
+
                       localStorage.setItem('cart', JSON.stringify(newCart));
                       window.dispatchEvent(new Event('cartUpdated'));
                       setCartCount(newCart.length);
@@ -231,8 +243,15 @@ const HeroSection = () => {
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
             <div className="bg-gray-900 border border-gray-800 w-full max-w-3xl rounded-3xl overflow-hidden relative flex flex-col md:flex-row">
               <button onClick={() => setSelectedProduct(null)} className="absolute top-4 right-4 z-10 bg-black/50 text-white w-10 h-10 rounded-full flex hover:bg-pink-500 transition-colors items-center justify-center">✕</button>
-              <div className="w-full md:w-1/2 aspect-square">
-                <img src={selectedProduct.img} alt={selectedProduct.name} className="w-full h-full object-cover" />
+              <div className="w-full md:w-1/2 aspect-square relative">
+                <Image
+                  src={selectedProduct.img}
+                  alt={selectedProduct.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority // Optional: Use this if the product image is "above the fold"
+                />
               </div>
               <div className="p-8 md:w-1/2 flex flex-col justify-center">
                 <h2 className="text-3xl font-black mb-2">{selectedProduct.name}</h2>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Define the Product interface to match your Shop section
 interface Product {
@@ -90,11 +91,13 @@ const CartPage = () => {
                                     key={`${item.id}-${index}`}
                                     className="bg-gray-900 rounded-2xl p-6 border border-gray-800 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 hover:border-pink-500/30 transition-colors"
                                 >
-                                    <div className="w-24 h-24 flex-shrink-0">
-                                        <img
+                                    <div className="w-24 h-24 flex-shrink-0 relative">
+                                        <Image
                                             src={item.img}
                                             alt={item.name}
-                                            className="w-full h-full object-cover rounded-xl"
+                                            fill
+                                            sizes="96px"
+                                            className="object-cover rounded-xl"
                                         />
                                     </div>
                                     <div className="flex-grow text-center sm:text-left">
