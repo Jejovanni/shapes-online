@@ -13,10 +13,8 @@ export const Footer = () => {
                     <div>
                         <p className="font-semibold text-pink-600 uppercase tracking-wider mb-3">Shop</p>
                         <ul className="space-y-2 text-sm">
-                            <li><a href="/products" className="hover:text-pink-100 transition duration-300">All Products</a></li>
-                            <li><a href="/categories/electronics" className="hover:text-pink-100 transition duration-300">Electronics</a></li>
-                            <li><a href="/categories/fashion" className="hover:text-pink-100 transition duration-300">Fashion</a></li>
-                            <li><a href="/sale" className="hover:text-pink-100 transition duration-300 text-red-400">Seasonal Sale</a></li>
+                            <li><a href="/#shop" className="hover:text-pink-100 transition duration-300">All Products</a></li>
+                            <li><a href="/testimonials" className="hover:text-pink-100 transition duration-300">Testimonials</a></li>
                         </ul>
                     </div>
 
