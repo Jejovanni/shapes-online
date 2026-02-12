@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export const Footer = () => {
     // Using black for the background (bg-black) and pink for the text (text-pink-400)
@@ -13,8 +14,8 @@ export const Footer = () => {
                     <div>
                         <p className="font-semibold text-pink-600 uppercase tracking-wider mb-3">Shop</p>
                         <ul className="space-y-2 text-sm">
-                            <li><a href="/#shop" className="hover:text-pink-100 transition duration-300">All Products</a></li>
-                            <li><a href="/testimonials" className="hover:text-pink-100 transition duration-300">Testimonials</a></li>
+                            <li><Link href="/#shop" className="hover:text-pink-100 transition duration-300">All Products</Link></li>
+                            <li><Link href="/testimonials" className="hover:text-pink-100 transition duration-300">Testimonials</Link></li>
                         </ul>
                     </div>
 
