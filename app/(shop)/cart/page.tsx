@@ -4,29 +4,43 @@ import React, { useState, useEffect } from 'react';
 import { Trash2, ShoppingBag, ArrowRight, Minus, Plus } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-// Updated interface to include quantity
-interface Product {
-    id: number;
-    name: string;
-    price: string;
-    description: string;
-    img: string;
-    quantity?: number; // Added quantity property
-}
+import { CartItem } from '@/types'; // Assumes you created types/index.ts
 
 const CartPage = () => {
-    const [cartItems, setCartItems] = useState<Product[]>([]);
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [isHydrated, setIsHydrated] = useState(false);
 
-    // 1. Load cart from localStorage on mount
+    // --- HELPER: Currency Formatter ---
+    const formatNaira = (amount: number) => {
+        return new Intl.NumberFormat('en-NG', {
+            style: 'currency',
+            currency: 'NGN',
+            minimumFractionDigits: 0,
+        }).format(amount).replace('NGN', '₦');
+    };
+
+    // 1. Load & Clean Cart Data
     useEffect(() => {
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
             try {
-                setCartItems(JSON.parse(savedCart));
+                const parsed = JSON.parse(savedCart);
+                // Data Cleanup: Ensure all items match the new structure
+                // This handles the transition from 'img' to 'image' and 'string price' to 'number'
+                const cleanCart = parsed.map((item: any) => ({
+                    ...item,
+                    // If 'image' is missing, try 'img', otherwise fallback
+                    image: item.image || item.img || '/images/placeholder.jpg', 
+                    // Ensure price is a clean number
+                    price: typeof item.price === 'string' 
+                        ? parseFloat(item.price.replace(/[^\d.]/g, '')) 
+                        : item.price
+                }));
+                setCartItems(cleanCart);
             } catch (error) {
                 console.error("Failed to parse cart:", error);
+                // If data is corrupt, clear it
+                localStorage.removeItem('cart');
             }
         }
         setIsHydrated(true);
@@ -35,7 +49,7 @@ const CartPage = () => {
     // 2. Quantity Change logic
     const updateQuantity = (index: number, delta: number) => {
         const updatedCart = [...cartItems];
-        const currentQty = updatedCart[index].quantity || 1;
+        const currentQty = Number(updatedCart[index].quantity) || 1;
         const newQty = currentQty + delta;
 
         if (newQty >= 1) {
@@ -54,13 +68,12 @@ const CartPage = () => {
         window.dispatchEvent(new Event('cartUpdated'));
     };
 
-    // 4. Calculation Logic (Updated to account for quantity)
+    // 4. Calculation Logic (Strictly Numeric)
     const subtotal = cartItems.reduce((acc, item) => {
-        const price = parseInt(item.price.replace(/[^\d]/g, "")) || 0;
-        const qty = item.quantity || 1;
+        const price = Number(item.price) || 0;
+        const qty = Number(item.quantity) || 1;
         return acc + (price * qty);
     }, 0);
-
 
     const deliveryFee = cartItems.length > 0 ? 2500 : 0;
     const total = subtotal + deliveryFee;
@@ -68,7 +81,7 @@ const CartPage = () => {
     if (!isHydrated) return null;
 
     return (
-        <div className="min-h-screen font-sans pt-24 pb-12">
+        <div className="min-h-screen font-sans pt-24 pb-12 bg-gray-950 text-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center space-x-4 mb-10">
                     <ShoppingBag className="h-10 w-10 text-pink-500" />
@@ -96,20 +109,28 @@ const CartPage = () => {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                        {/* LEFT COLUMN: Cart Items */}
                         <div className="lg:col-span-2 space-y-6">
                             {cartItems.map((item, index) => (
                                 <div
                                     key={`${item.id}-${index}`}
                                     className="bg-gray-900 rounded-2xl p-6 border border-gray-800 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 hover:border-pink-500/30 transition-colors"
                                 >
-                                    <div className="w-24 h-24 flex-shrink-0 relative">
-                                        <Image
-                                            src={item.img}
-                                            alt={item.name}
-                                            fill
-                                            sizes="96px"
-                                            className="object-cover rounded-xl"
-                                        />
+                                    <div className="w-24 h-24 flex-shrink-0 relative bg-gray-800 rounded-xl overflow-hidden">
+                                        {/* Added Safety Check for Image Src */}
+                                        {item.image ? (
+                                            <Image
+                                                src={item.image}
+                                                alt={item.name}
+                                                fill
+                                                sizes="96px"
+                                                className="object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">
+                                                No Image
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex-grow text-center sm:text-left">
                                         <h3 className="text-xl font-bold text-white">{item.name}</h3>
@@ -138,7 +159,7 @@ const CartPage = () => {
 
                                     <div className="text-center sm:text-right flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto space-x-4 sm:space-x-0">
                                         <span className="text-xl font-black text-pink-500">
-                                            ₦{((parseInt(item.price.replace(/[^\d]/g, "")) || 0) * (item.quantity || 1)).toLocaleString()}
+                                            {formatNaira((Number(item.price) || 0) * (item.quantity || 1))}
                                         </span>
                                         <button
                                             onClick={() => removeItem(index)}
@@ -151,6 +172,7 @@ const CartPage = () => {
                             ))}
                         </div>
 
+                        {/* RIGHT COLUMN: Summary */}
                         <div className="lg:col-span-1">
                             <div className="bg-gray-900 rounded-3xl p-8 border border-gray-800 sticky top-28 shadow-2xl">
                                 <h2 className="text-2xl text-white font-bold mb-6 border-b border-gray-800 pb-4">Order Summary</h2>
@@ -158,16 +180,16 @@ const CartPage = () => {
                                 <div className="space-y-4 mb-8">
                                     <div className="flex justify-between text-gray-400">
                                         <span>Subtotal</span>
-                                        <span>₦{subtotal.toLocaleString()}</span>
+                                        <span>{formatNaira(subtotal)}</span>
                                     </div>
                                     <div className="flex justify-between text-gray-400">
                                         <span>Delivery Fee</span>
-                                        <span>₦{deliveryFee.toLocaleString()}</span>
+                                        <span>{formatNaira(deliveryFee)}</span>
                                     </div>
                                     <div className="h-px bg-gray-800 my-4" />
                                     <div className="flex justify-between text-xl font-bold text-white">
                                         <span>Total</span>
-                                        <span className="text-pink-500">₦{total.toLocaleString()}</span>
+                                        <span className="text-pink-500">{formatNaira(total)}</span>
                                     </div>
                                 </div>
 
@@ -179,7 +201,7 @@ const CartPage = () => {
                                 </Link>
 
                                 <p className="text-center text-xs text-gray-500 uppercase tracking-widest font-semibold pt-8">
-                                    Secure Checkout Powered by Paystack
+                                    Secure Transfer via Bank App
                                 </p>
                             </div>
                         </div>
