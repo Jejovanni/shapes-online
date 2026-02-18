@@ -13,8 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shapes Online",
-  description: "Premium shapes for your creative projects",
+  title: "Shapes Lagos | Transform Your Body in 90 Days",
+  description: "Join the #1 weight loss transformation program. Shop premium supplements and start your journey today.",
+  icons: {
+    icon: "/favicon.ico", // The standard favicon (32x32)
+    apple: "/apple-touch-icon.png", // For iPhone/iPad home screen
+  },
 };
 
 export default function RootLayout({
