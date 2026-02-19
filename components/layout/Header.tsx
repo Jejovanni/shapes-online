@@ -98,10 +98,6 @@ export const Header = () => {
                         )}
                     </Link>
 
-                    <Link href="/login" aria-label="User Account" className="p-2 hover:bg-pink-900 rounded-full transition duration-300">
-                        <User className="h-7 w-7" />
-                    </Link>
-
                     <button 
                         onClick={() => setIsDrawerOpen(true)}
                         className="md:hidden p-2 hover:bg-pink-900 rounded-full transition duration-300" 
