@@ -62,7 +62,7 @@ export default function ContactPage() {
             icon={<MapPin className="h-6 w-6" />}
             title="Studio Location"
             content="Lagos, Nigeria"
-            link="https://maps.google.com/maps?q=Lagos,%20Nigeria"
+            link="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.4267006063474!2d3.636267275461836!3d6.467506393524195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf99b9432ffcd%3A0x14ad703b1f0d93eb!2sNovare%20Mall%2C%20shoprite!5e0!3m2!1sen!2sng!4v1771608455669!5m2!1sen!2sng"
           />
 
           <div className="pt-4">
