@@ -88,7 +88,7 @@ export default function AboutPage() {
           We believe the best transformations start with the right balance. Start exploring our weight loss solutions today and find the precise support you need to reach your goals.
         </p>
         <a 
-          href="/products" 
+          href="/#shop" 
           className="inline-block px-8 py-3 bg-pink-600 text-black font-bold rounded-full shadow-lg hover:bg-pink-400 transition transform hover:scale-105"
         >
           View All Products
