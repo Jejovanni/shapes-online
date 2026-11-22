@@ -173,7 +173,6 @@ export default function CheckoutPage() {
                                     <span className="text-gray-400 text-sm">Account Number</span>
                                     <span className="text-pink-500 text-2xl font-mono font-bold tracking-tighter">09155966666</span>
                                 </div>
-                            </div>
                         </div>
 
                         <div className="space-y-4">
