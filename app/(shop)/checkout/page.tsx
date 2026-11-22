@@ -160,6 +160,22 @@ export default function CheckoutPage() {
                             </div>
                         </div>
 
+                         <div className="space-y-4">
+                                <div className="flex justify-between border-b border-white/10 pb-2">
+                                    <span className="text-gray-400 text-sm">Bank</span>
+                                    <span className="font-bold">Opay</span>
+                                </div>
+                                <div className="flex justify-between border-b border-white/10 pb-2">
+                                    <span className="text-gray-400 text-sm">Account Name</span>
+                                    <span className="font-bold uppercase">ShapesLagos Okofu</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-400 text-sm">Account Number</span>
+                                    <span className="text-pink-500 text-2xl font-mono font-bold tracking-tighter">09155966666</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="space-y-4">
                             <label className="text-sm font-bold text-gray-700">Upload Transfer Proof</label>
                             {!previewUrl ? (
