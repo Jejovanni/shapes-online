@@ -56,7 +56,7 @@ export default function ContactPage() {
         <div className="lg:col-span-1 space-y-8 p-6 bg-black rounded-2xl shadow-xl text-pink-400 border border-pink-900/50">
           <h2 className="text-3xl font-bold text-pink-500 mb-4">Contact Details</h2>
 
-          <ContactDetail icon={<Mail className="h-6 w-6" />} title="Email Support" content="support@shapesonline.com" link="mailto:support@shapesonline.com" />
+          <ContactDetail icon={<Mail className="h-6 w-6" />} title="Email Support" content="shapeslagos@gmail.com" link="mailto:shapeslagos@gmail.com" />
           <ContactDetail icon={<Phone className="h-6 w-6" />} title="Sales Line" content="+2348163114858" link="tel:+2348163114858" />
           <ContactDetail
             icon={<MapPin className="h-6 w-6" />}
