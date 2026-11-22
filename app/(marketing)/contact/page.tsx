@@ -24,7 +24,7 @@ export default function ContactPage() {
           Get in Touch
         </h1>
         <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-          We&apos;re here to help you with orders, design questions, or custom requests.
+          We&apos;re here to help you with orders or custom requests.
         </p>
       </section>
 
@@ -36,10 +36,10 @@ export default function ContactPage() {
             Need Immediate Assistance?
           </h2>
           <p className="text-gray-600 mb-8 max-w-lg">
-            Chat with our sales and support team directly on WhatsApp for the fastest response to your questions about orders, products, or custom shapes.
+            Chat with our sales and support team directly on WhatsApp for the fastest response to your questions about orders.
           </p>
           <a
-            href="https://wa.me/+2348163114858"
+            href="https://wa.me/+2349155966666"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center space-x-3 px-8 py-3 bg-green-500 text-white font-bold text-lg rounded-full shadow-lg hover:bg-green-600 transition duration-300 transform hover:scale-105"
@@ -58,6 +58,7 @@ export default function ContactPage() {
 
           <ContactDetail icon={<Mail className="h-6 w-6" />} title="Email Support" content="shapeslagos@gmail.com" link="mailto:shapeslagos@gmail.com" />
           <ContactDetail icon={<Phone className="h-6 w-6" />} title="Sales Line" content="+2348163114858" link="tel:+2348163114858" />
+          <ContactDetail icon={<Phone className="h-6 w-6" />} title="Contact Line" content="+2349155966666" link="tel:+2349155966666" />
           <ContactDetail
             icon={<MapPin className="h-6 w-6" />}
             title="Studio Location"
