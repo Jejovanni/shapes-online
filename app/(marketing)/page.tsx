@@ -30,8 +30,8 @@ export default function HeroSection() {
 
   const products: Product[] = [
     { id: "1", name: "Shapes Lagos Premium kit", price: 480000, description: "The 90 days total weightloss wellness plan, the top of our product line.", image: "/images/IMG-20261122-WA0001.jpg" },
-    { id: "2", name: "Shapes Lagos Platinum Kit", price: 326000, description: "Contains the new and improved Bum & slim tea. All natural ingredients.", image: "/images/IMG-20261122-WA0002.jpg" },
-    { id: "3", name: "Shapes Lagos Signature kit", price: 164000, description: "Contains a comprehensive weight loss regimen including the skinny coffee and protein shake for healthy nutrition.", image: "/images/IMG-20261122-WA0003.jpg" },
+    { id: "2", name: "Shapes Lagos Platinum Kit", price: 326000, description: "Contains the new and improved Bum & slim tea. All natural ingredients.", image: "/images/IMG-20261122-WA0003.jpg" },
+    { id: "3", name: "Shapes Lagos Signature kit", price: 164000, description: "Contains a comprehensive weight loss regimen including the skinny coffee and protein shake for healthy nutrition.", image: "/images/IMG-20261122-WA0002.jpg" },
      ];
 
   // Add to Cart Logic
