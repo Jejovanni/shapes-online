@@ -147,15 +147,15 @@ export default function CheckoutPage() {
                             <div className="space-y-4">
                                 <div className="flex justify-between border-b border-white/10 pb-2">
                                     <span className="text-gray-400 text-sm">Bank</span>
-                                    <span className="font-bold">Wema Bank / ALAT</span>
+                                    <span className="font-bold">Opay</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/10 pb-2">
                                     <span className="text-gray-400 text-sm">Account Name</span>
-                                    <span className="font-bold uppercase">Shapes Online Ltd</span>
+                                    <span className="font-bold uppercase">ShapesLagos International</span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-400 text-sm">Account Number</span>
-                                    <span className="text-pink-500 text-2xl font-mono font-bold tracking-tighter">0123456789</span>
+                                    <span className="text-pink-500 text-2xl font-mono font-bold tracking-tighter">6101715635</span>
                                 </div>
                             </div>
                         </div>
