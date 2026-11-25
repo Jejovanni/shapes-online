@@ -25,16 +25,6 @@ export default function ReturnsPolicyPage() {
                         <p className="mb-4">
                             We accept returns within <strong className="text-pink-600">30 days</strong> of the purchase date. To be eligible for a return, your item must be unused, in the same condition that you received it, and in its original packaging.
                         </p>
-                        <ul className="space-y-2 list-none pl-0 text-sm bg-gray-50 p-4 rounded-lg border border-gray-200">
-                            <li className="flex items-start gap-2">
-                                <span className="text-pink-500 font-bold flex-shrink-0">•</span>
-                                <p>Digital products (vector packs, downloads) are non-refundable once the file has been accessed or downloaded, except in cases of technical fault.</p>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-pink-500 font-bold flex-shrink-0">•</span>
-                                <p>Custom or personalized orders cannot be returned or exchanged.</p>
-                            </li>
-                        </ul>
                     </div>
 
                     {/* Section 2: How to Initiate a Return */}
@@ -48,13 +38,13 @@ export default function ReturnsPolicyPage() {
                         </p>
                         <ol className="space-y-3 list-decimal list-inside pl-4">
                             <li>
-                                <strong className="font-semibold text-gray-900">Contact Us:</strong> Email us at <a href="mailto:support@shapesshop.com" className="text-pink-600 hover:underline">support@shapesshop.com</a> with your Order Number and the reason for the return.
+                                <strong className="font-semibold text-gray-900">Contact Us:</strong> Email us at <a href="mailto:shapeslagos@gmail.com" className="text-pink-600 hover:underline">shapeslagos@gmail.com</a> with your Order Number and the reason for the return.
                             </li>
                             <li>
-                                <strong className="font-semibold text-gray-900">Receive Authorization:</strong> We will review your request and send you a Return Authorization (RA) number and return shipping instructions.
+                                <strong className="font-semibold text-gray-900">Receive Authorization:</strong> We will review your request and send you return shipping instructions.
                             </li>
                             <li>
-                                <strong className="font-semibold text-gray-900">Ship the Item:</strong> Carefully package the item, include the RA number inside, and ship it to the address provided in the instructions. You will be responsible for paying your own shipping costs for returning your item.
+                                <strong className="font-semibold text-gray-900">Ship the Item:</strong> Carefully package the item and ship it to the address provided in the instructions. You will be responsible for paying your own shipping costs for returning your item.
                             </li>
                         </ol>
                     </div>
@@ -75,7 +65,7 @@ export default function ReturnsPolicyPage() {
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="text-pink-500 font-bold flex-shrink-0">•</span>
-                                <p><strong className="font-semibold text-gray-900">Late or Missing Refunds:</strong> If you haven't received a refund yet, first check your bank account. Then contact your credit card company. If you've done all of this and still have not received your refund, please contact us.</p>
+                                <p><strong className="font-semibold text-gray-900">Late or Missing Refunds:</strong> If you haven't received a refund yet, first check your bank account. Then contact your bank or credit card company. If you've done all of this and still have not received your refund, please contact us.</p>
                             </li>
                         </ul>
                     </div>

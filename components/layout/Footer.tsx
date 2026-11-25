@@ -15,7 +15,7 @@ export const Footer = () => {
                         <p className="font-semibold text-pink-600 uppercase tracking-wider mb-3">Shop</p>
                         <ul className="space-y-2 text-sm">
                             <li><Link href="/#shop" className="hover:text-pink-100 transition duration-300">All Products</Link></li>
-                            <li><Link href="/testimonials" className="hover:text-pink-100 transition duration-300">Testimonials</Link></li>
+                            {/* <li><Link href="/testimonials" className="hover:text-pink-100 transition duration-300">Testimonials</Link></li> */}
                         </ul>
                     </div>
 
@@ -23,7 +23,7 @@ export const Footer = () => {
                     <div>
                         <p className="font-semibold text-pink-600 uppercase tracking-wider mb-3">Help & Support</p>
                         <ul className="space-y-2 text-sm">
-                            <li><a href="/account" className="hover:text-pink-100 transition duration-300">My Account</a></li>
+                            {/* <li><a href="/account" className="hover:text-pink-100 transition duration-300">My Account</a></li> */}
                             <li><a href="/orders" className="hover:text-pink-100 transition duration-300">Track Order</a></li>
                             <li><a href="/returns" className="hover:text-pink-100 transition duration-300">Returns & Refunds</a></li>
                             <li><a href="/faq" className="hover:text-pink-100 transition duration-300">FAQ</a></li>
@@ -35,7 +35,7 @@ export const Footer = () => {
                         <p className="font-semibold text-pink-600 uppercase tracking-wider mb-3">Company</p>
                         <ul className="space-y-2 text-sm">
                             <li><a href="/about" className="hover:text-pink-100 transition duration-300">Our Story</a></li>
-                            <li><a href="/careers" className="hover:text-pink-100 transition duration-300">Careers</a></li>
+                            {/* <li><a href="/careers" className="hover:text-pink-100 transition duration-300">Careers</a></li> */}
                             <li><a href="/contact" className="hover:text-pink-100 transition duration-300">Contact Us</a></li>
                         </ul>
                     </div>
@@ -53,15 +53,15 @@ export const Footer = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.5" y1="6.5" y2="6.5" /></svg>
                             </a>
                         </div>
-                        <p className="mt-4 text-xs text-pink-500">
+                        {/* <p className="mt-4 text-xs text-pink-500">
                             Sign up for pink-themed updates!
-                        </p>
+                        </p> */}
                     </div>
                 </div>
 
                 {/* Bottom Section: Copyright */}
                 <div className="text-center text-sm text-pink-500 pt-4">
-                    <p>&copy; {new Date().getFullYear()} Shapes Online. All rights reserved. <span className="hidden sm:inline">| Built for modern e-commerce.</span></p>
+                    <p>&copy; {new Date().getFullYear()} Shapes Lagos. All rights reserved. <span className="hidden sm:inline">| Built for global e-commerce.</span></p>
                 </div>
             </div>
         </footer>

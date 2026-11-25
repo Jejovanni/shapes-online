@@ -32,7 +32,7 @@ export default function HeroSection() {
     { id: "1", name: "Shapes Lagos Premium kit", price: 480000, description: "The 90 days total weightloss wellness plan, the top of our product line.", image: "/images/IMG-20261122-WA0001.jpg" },
     { id: "2", name: "Shapes Lagos Platinum Kit", price: 326000, description: "Contains the new and improved Bum & slim tea. All natural ingredients.", image: "/images/IMG-20261122-WA0003.jpg" },
     { id: "3", name: "Shapes Lagos Signature kit", price: 164000, description: "Contains a comprehensive weight loss regimen including the skinny coffee and protein shake for healthy nutrition.", image: "/images/IMG-20261122-WA0002.jpg" },
-     ];
+  ];
 
   // Add to Cart Logic
   const addToCart = (product: Product) => {
@@ -83,11 +83,11 @@ export default function HeroSection() {
               </p>
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
                 <Link href="#shop" className="inline-flex items-center justify-center rounded-xl transition-colors duration-300 font-bold whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 text-lg sm:text-xl px-8 sm:px-10 py-4 sm:py-5 h-auto w-full sm:w-auto bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-600 hover:to-pink-700 shadow-2xl text-white active:scale-95">
-                  Get Started Now
+                  Shop Now
                 </Link>
-                <Button size="xl" variant="outline" className="w-full sm:w-auto text-base sm:text-lg border-white/30 text-white backdrop-blur-sm hover:bg-pink-500 hover:border-pink-500">
+                {/* <Button size="xl" variant="outline" className="w-full sm:w-auto text-base sm:text-lg border-white/30 text-white backdrop-blur-sm hover:bg-pink-500 hover:border-pink-500">
                   See Results
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>

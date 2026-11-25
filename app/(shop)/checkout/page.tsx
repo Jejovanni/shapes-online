@@ -69,7 +69,7 @@ export default function CheckoutPage() {
     // 4. Submit Logic
     const handleCheckout = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         if (!screenshot) {
             alert("Please upload a screenshot of your transfer to complete your order.");
             return;
@@ -96,7 +96,7 @@ export default function CheckoutPage() {
             if (response.ok) {
                 localStorage.removeItem('cart');
                 // Notify other components that cart is empty
-                window.dispatchEvent(new Event('cartUpdated')); 
+                window.dispatchEvent(new Event('cartUpdated'));
                 router.push('/checkout/success');
             } else {
                 const errorData = await response.json();
@@ -118,25 +118,48 @@ export default function CheckoutPage() {
 
                 {/* LEFT COLUMN: Inputs */}
                 <div className="space-y-8">
-                    
+
                     {/* Shipping Details */}
-                    <section className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                    <section className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-100">
+                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900">
                             <ShieldCheck className="text-pink-600" size={24} />
                             Shipping Details
                         </h2>
                         <div className="grid grid-cols-1 gap-4">
-                            <input required name="firstName" placeholder="Full Name" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 focus:ring-2 focus:ring-pink-500 outline-none transition-all" />
-                            <input required name="email" type="email" placeholder="Email Address" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 focus:ring-2 focus:ring-pink-500 outline-none transition-all" />
-                            <input required name="phone" type="tel" placeholder="WhatsApp Number" className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 focus:ring-2 focus:ring-pink-500 outline-none transition-all" />
-                            <textarea required name="address" placeholder="Full Delivery Address (Street, City, State)" rows={3} className="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 focus:ring-2 focus:ring-pink-500 outline-none transition-all" />
+                            <input
+                                required
+                                name="firstName"
+                                placeholder="Full Name"
+                                className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 text-base focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:bg-white outline-none transition-all"
+                            />
+                            <input
+                                required
+                                name="email"
+                                type="email"
+                                placeholder="Email Address"
+                                className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 text-base focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:bg-white outline-none transition-all"
+                            />
+                            <input
+                                required
+                                name="phone"
+                                type="tel"
+                                placeholder="WhatsApp Number"
+                                className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 text-base focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:bg-white outline-none transition-all"
+                            />
+                            <textarea
+                                required
+                                name="address"
+                                placeholder="Full Delivery Address (Street, City, State)"
+                                rows={3}
+                                className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 text-base focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:bg-white outline-none transition-all"
+                            />
                         </div>
                     </section>
 
                     {/* Bank Transfer Details */}
-                    <section className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                    <section className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-100">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-xl font-bold">Bank Transfer</h2>
+                            <h2 className="text-xl font-bold text-gray-900">Bank Transfer</h2>
                             <div className="px-3 py-1 bg-pink-50 text-pink-600 rounded-full text-[10px] font-black uppercase tracking-widest">Secure</div>
                         </div>
 
@@ -160,7 +183,7 @@ export default function CheckoutPage() {
                             </div>
                         </div>
 
-                         
+
                         <div className="space-y-4">
                             <label className="text-sm font-bold text-gray-700">Upload Transfer Proof</label>
                             {!previewUrl ? (
@@ -188,7 +211,7 @@ export default function CheckoutPage() {
                 <div className="lg:sticky lg:top-10 h-fit">
                     <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
                         <h3 className="text-xl font-bold text-gray-900 mb-6">Final Summary</h3>
-                        
+
                         <div className="space-y-4 mb-8">
                             <div className="flex justify-between text-gray-500 font-medium">
                                 <span>Subtotal</span>
@@ -211,11 +234,10 @@ export default function CheckoutPage() {
                         <button
                             type="submit"
                             disabled={isProcessing || !screenshot}
-                            className={`w-full py-5 text-white font-black rounded-2xl text-xl transition-all flex items-center justify-center gap-3 shadow-lg ${
-                                isProcessing || !screenshot
+                            className={`w-full py-5 text-white font-black rounded-2xl text-xl transition-all flex items-center justify-center gap-3 shadow-lg ${isProcessing || !screenshot
                                     ? 'bg-gray-300 cursor-not-allowed shadow-none'
                                     : 'bg-pink-600 hover:bg-pink-700 active:scale-95 shadow-pink-100'
-                            }`}
+                                }`}
                         >
                             {isProcessing ? (
                                 <Loader2 className="w-6 h-6 animate-spin" />
@@ -226,7 +248,7 @@ export default function CheckoutPage() {
                                 </>
                             )}
                         </button>
-                        
+
                         <p className="mt-6 text-[10px] text-center text-gray-400 uppercase tracking-widest font-bold">
                             Orders are verified within 1-2 hours
                         </p>
