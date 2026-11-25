@@ -12,6 +12,8 @@ interface Order {
     created_at: string;
     customer_name: string;
     email: string;
+    phone?: string | null;
+    address?: string | null;
     items_summary: string;
     total_amount: number;
     screenshot_url: string | null;
@@ -130,6 +132,7 @@ export default async function AdminDashboard(props: {
                         <thead className="bg-gray-50/50 border-b border-gray-100">
                             <tr>
                                 <th className="p-4 md:p-5 font-bold text-xs uppercase text-gray-400">Customer</th>
+                                <th className="p-4 md:p-5 font-bold text-xs uppercase text-gray-400">Contact & Address</th>
                                 <th className="p-4 md:p-5 font-bold text-xs uppercase text-gray-400">Items</th>
                                 <th className="p-4 md:p-5 font-bold text-xs uppercase text-gray-400">Total</th>
                                 <th className="p-4 md:p-5 font-bold text-xs uppercase text-gray-400">Proof</th>
@@ -148,6 +151,23 @@ export default async function AdminDashboard(props: {
                                             </div>
                                             <CopyButton text={order.email} />
                                         </div>
+                                    </td>
+                                    <td className="p-4 md:p-5 text-xs text-gray-600 max-w-xs">
+                                        {order.phone ? (
+                                            <div className="flex items-center gap-1.5 font-medium text-gray-900 mb-0.5">
+                                                <span>{order.phone}</span>
+                                                <CopyButton text={order.phone} />
+                                            </div>
+                                        ) : (
+                                            <span className="text-[10px] text-gray-400 italic">No phone</span>
+                                        )}
+                                        {order.address ? (
+                                            <div className="text-[11px] text-gray-500 line-clamp-2" title={order.address}>
+                                                {order.address}
+                                            </div>
+                                        ) : (
+                                            <span className="text-[10px] text-gray-400 italic">No address</span>
+                                        )}
                                     </td>
                                     <td className="p-4 md:p-5 text-sm text-gray-600 max-w-xs truncate font-medium">
                                         {order.items_summary}
