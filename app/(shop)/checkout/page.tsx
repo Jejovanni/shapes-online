@@ -4,10 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { CartItem } from '@/types'; // Using your shared types
-import { CheckCircle, Receipt, X, Camera, Loader2, ShieldCheck } from 'lucide-react';
+import { DELIVERY_ZONES } from '@/lib/delivery';
+import { CheckCircle, Receipt, X, Camera, Loader2, ShieldCheck, Truck } from 'lucide-react';
 
 export default function CheckoutPage() {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [selectedZoneId, setSelectedZoneId] = useState<string>(DELIVERY_ZONES[0].id);
     const [isHydrated, setIsHydrated] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [screenshot, setScreenshot] = useState<File | null>(null);
@@ -34,8 +36,19 @@ export default function CheckoutPage() {
                 console.error("Failed to parse cart", e);
             }
         }
+        const savedZone = localStorage.getItem('selectedDeliveryZone');
+        if (savedZone && DELIVERY_ZONES.some(z => z.id === savedZone)) {
+            setSelectedZoneId(savedZone);
+        }
         setIsHydrated(true);
     }, []);
+
+    const handleZoneChange = (zoneId: string) => {
+        setSelectedZoneId(zoneId);
+        localStorage.setItem('selectedDeliveryZone', zoneId);
+    };
+
+    const currentZone = DELIVERY_ZONES.find(z => z.id === selectedZoneId) || DELIVERY_ZONES[0];
 
     // 2. Robust Calculation Logic (Prevents NaN)
     const subtotal = cartItems.reduce((acc, item) => {
@@ -45,7 +58,7 @@ export default function CheckoutPage() {
     }, 0);
 
     // Only charge delivery if there are items
-    const deliveryFee = cartItems.length > 0 ? 2500 : 0;
+    const deliveryFee = cartItems.length > 0 ? currentZone.fee : 0;
     const total = subtotal + deliveryFee;
 
     // 3. File Handling
@@ -84,6 +97,8 @@ export default function CheckoutPage() {
 
         const formData = new FormData(e.currentTarget);
         formData.append('items_summary', itemsSummary);
+        formData.append('delivery_zone', currentZone.label);
+        formData.append('delivery_fee', deliveryFee.toString());
         formData.append('total', total.toString()); // Send raw number string
         formData.append('screenshot', screenshot);
 
@@ -125,6 +140,31 @@ export default function CheckoutPage() {
                             <ShieldCheck className="text-pink-600" size={24} />
                             Shipping Details
                         </h2>
+
+                        {/* Delivery Location Picker */}
+                        <div className="mb-6">
+                            <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 flex items-center gap-1.5">
+                                <Truck size={14} className="text-pink-600" />
+                                Select Delivery Location
+                            </label>
+                            <div className="relative">
+                                <select
+                                    value={selectedZoneId}
+                                    onChange={(e) => handleZoneChange(e.target.value)}
+                                    className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 font-semibold text-base focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:bg-white outline-none transition-all cursor-pointer appearance-none pr-10"
+                                >
+                                    {DELIVERY_ZONES.map((zone) => (
+                                        <option key={zone.id} value={zone.id}>
+                                            {zone.label} — {formatNaira(zone.fee)}
+                                        </option>
+                                    ))}
+                                </select>
+                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                    ▼
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="grid grid-cols-1 gap-4">
                             <input
                                 required
@@ -218,8 +258,8 @@ export default function CheckoutPage() {
                                 <span className="text-gray-900">{formatNaira(subtotal)}</span>
                             </div>
                             <div className="flex justify-between text-gray-500 font-medium">
-                                <span>Delivery Fee</span>
-                                <span>{formatNaira(deliveryFee)}</span>
+                                <span>Delivery Fee ({currentZone.label})</span>
+                                <span className="text-gray-900 font-semibold">{formatNaira(deliveryFee)}</span>
                             </div>
                             <div className="pt-4 border-t border-gray-100 flex justify-between items-end">
                                 <span className="font-bold text-gray-900">Total to Pay</span>
@@ -235,8 +275,8 @@ export default function CheckoutPage() {
                             type="submit"
                             disabled={isProcessing || !screenshot}
                             className={`w-full py-5 text-white font-black rounded-2xl text-xl transition-all flex items-center justify-center gap-3 shadow-lg ${isProcessing || !screenshot
-                                    ? 'bg-gray-300 cursor-not-allowed shadow-none'
-                                    : 'bg-pink-600 hover:bg-pink-700 active:scale-95 shadow-pink-100'
+                                ? 'bg-gray-300 cursor-not-allowed shadow-none'
+                                : 'bg-pink-600 hover:bg-pink-700 active:scale-95 shadow-pink-100'
                                 }`}
                         >
                             {isProcessing ? (

@@ -14,11 +14,18 @@ export async function POST(req: Request) {
         const formData = await req.formData();
         
         // Match the 'name' attributes from your checkout/page.tsx
+        const deliveryZone = (formData.get('delivery_zone') as string) || '';
+        const deliveryFee = (formData.get('delivery_fee') as string) || '';
+        const rawAddress = formData.get('address') as string;
+        const formattedAddress = deliveryZone ? `[${deliveryZone}] ${rawAddress}` : rawAddress;
+
         const guestInfo = {
             fullName: formData.get('firstName') as string, // Fixed from 'full_name'
             email: formData.get('email') as string,
             phone: formData.get('phone') as string,
-            address: formData.get('address') as string,
+            address: formattedAddress,
+            deliveryZone: deliveryZone,
+            deliveryFee: deliveryFee,
             total: formData.get('total') as string,
             items: formData.get('items_summary') as string,
         };
@@ -76,6 +83,9 @@ export async function POST(req: Request) {
                     <div style="background: #f9fafb; padding: 20px; border-radius: 12px; margin: 20px 0;">
                         <p><strong>Customer:</strong> ${guestInfo.fullName}</p>
                         <p><strong>Total:</strong> ₦${parseFloat(guestInfo.total).toLocaleString()}</p>
+                        ${guestInfo.deliveryZone ? `<p><strong>Delivery Location:</strong> ${guestInfo.deliveryZone}</p>` : ''}
+                        <p><strong>Address:</strong> ${guestInfo.address}</p>
+                        <p><strong>Phone:</strong> ${guestInfo.phone}</p>
                         <p><strong>Items:</strong> ${guestInfo.items}</p>
                     </div>
 

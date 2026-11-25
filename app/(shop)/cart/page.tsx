@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Trash2, ShoppingBag, ArrowRight, Minus, Plus } from 'lucide-react';
+import { Trash2, ShoppingBag, ArrowRight, Minus, Plus, Truck } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CartItem } from '@/types'; // Assumes you created types/index.ts
+import { DELIVERY_ZONES } from '@/lib/delivery';
 
 const CartPage = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [selectedZoneId, setSelectedZoneId] = useState<string>(DELIVERY_ZONES[0].id);
     const [isHydrated, setIsHydrated] = useState(false);
 
     // --- HELPER: Currency Formatter ---
@@ -43,8 +45,19 @@ const CartPage = () => {
                 localStorage.removeItem('cart');
             }
         }
+        const savedZone = localStorage.getItem('selectedDeliveryZone');
+        if (savedZone && DELIVERY_ZONES.some(z => z.id === savedZone)) {
+            setSelectedZoneId(savedZone);
+        }
         setIsHydrated(true);
     }, []);
+
+    const handleZoneChange = (zoneId: string) => {
+        setSelectedZoneId(zoneId);
+        localStorage.setItem('selectedDeliveryZone', zoneId);
+    };
+
+    const currentZone = DELIVERY_ZONES.find(z => z.id === selectedZoneId) || DELIVERY_ZONES[0];
 
     // 2. Quantity Change logic
     const updateQuantity = (index: number, delta: number) => {
@@ -75,7 +88,7 @@ const CartPage = () => {
         return acc + (price * qty);
     }, 0);
 
-    const deliveryFee = cartItems.length > 0 ? 2500 : 0;
+    const deliveryFee = cartItems.length > 0 ? currentZone.fee : 0;
     const total = subtotal + deliveryFee;
 
     if (!isHydrated) return null;
@@ -182,9 +195,28 @@ const CartPage = () => {
                                         <span>Subtotal</span>
                                         <span>{formatNaira(subtotal)}</span>
                                     </div>
+
+                                    {/* Location Picker */}
+                                    <div className="pt-2">
+                                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                            <Truck size={14} className="text-pink-500" /> Delivery Location
+                                        </label>
+                                        <select
+                                            value={selectedZoneId}
+                                            onChange={(e) => handleZoneChange(e.target.value)}
+                                            className="w-full p-3 rounded-xl border border-gray-700 bg-gray-800 text-white text-sm font-medium focus:ring-2 focus:ring-pink-500 outline-none transition-all cursor-pointer"
+                                        >
+                                            {DELIVERY_ZONES.map((zone) => (
+                                                <option key={zone.id} value={zone.id}>
+                                                    {zone.label} ({formatNaira(zone.fee)})
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
                                     <div className="flex justify-between text-gray-400">
-                                        <span>Delivery Fee</span>
-                                        <span>{formatNaira(deliveryFee)}</span>
+                                        <span>Delivery Fee ({currentZone.label})</span>
+                                        <span className="text-white font-medium">{formatNaira(deliveryFee)}</span>
                                     </div>
                                     <div className="h-px bg-gray-800 my-4" />
                                     <div className="flex justify-between text-xl font-bold text-white">
