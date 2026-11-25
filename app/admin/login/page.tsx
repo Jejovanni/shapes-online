@@ -34,8 +34,8 @@ export default function AdminLogin() {
         }
 
         // Security Check: Ensure the user is actually the admin
-        // Replace with your actual admin email
-        if (data.user?.email !== 'jamaineekong@gmail.com') {
+        const ADMIN_EMAILS = ['jamaineekong@gmail.com', 'shapeslagos@gmail.com'];
+        if (!data.user?.email || !ADMIN_EMAILS.includes(data.user.email)) {
             await supabase.auth.signOut();
             setErrorMessage("Access denied. Authorized admins only.");
             setLoading(false);
