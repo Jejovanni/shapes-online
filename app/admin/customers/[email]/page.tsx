@@ -12,19 +12,26 @@ export default async function CustomerDetailPage(props: { params: Promise<{ emai
         process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-    const { data: customer } = await supabase
-        .from('customers')
-        .select('*')
-        .eq('email', email)
-        .single();
-
     const { data: orders } = await supabase
         .from('orders')
         .select('*')
-        .eq('email', email)
+        .ilike('email', email)
         .order('created_at', { ascending: false });
 
-    if (!customer) return <div className="p-10 text-center">Customer not found.</div>;
+    if (!orders || orders.length === 0) {
+        return (
+            <div className="p-10 text-center">
+                <p className="text-gray-500 mb-4">No orders found for this customer.</p>
+                <Link href="/admin/orders" className="text-pink-600 font-bold hover:underline">
+                    Back to Dashboard
+                </Link>
+            </div>
+        );
+    }
+
+    const totalSpent = orders.reduce((acc, curr) => acc + (Number(curr.total_amount) || 0), 0);
+    const totalOrders = orders.length;
+    const lastOrderDate = orders[0]?.created_at;
 
     return (
         <div className="p-4 md:p-8 bg-gray-50 min-h-screen">
@@ -36,7 +43,7 @@ export default async function CustomerDetailPage(props: { params: Promise<{ emai
             {/* Header Section */}
             <header className="mb-8 md:mb-10">
                 <h1 className="text-2xl md:text-4xl font-black text-gray-900 break-all md:break-normal">
-                    {customer.email}
+                    {email}
                 </h1>
                 <p className="text-gray-500 text-sm md:text-base">Customer Profile & Purchase History</p>
             </header>
@@ -46,20 +53,20 @@ export default async function CustomerDetailPage(props: { params: Promise<{ emai
                 <div className="bg-white p-5 md:p-6 rounded-3xl border border-gray-100 shadow-sm">
                     <TrendingUp className="text-pink-500 mb-3 md:mb-4" size={20} />
                     <p className="text-[10px] md:text-sm text-gray-500 font-bold uppercase tracking-wider">Lifetime Value</p>
-                    <p className="text-2xl md:text-3xl font-black">₦{customer.total_spent.toLocaleString()}</p>
+                    <p className="text-2xl md:text-3xl font-black">₦{totalSpent.toLocaleString()}</p>
                 </div>
 
                 <div className="bg-white p-5 md:p-6 rounded-3xl border border-gray-100 shadow-sm">
                     <ShoppingBag className="text-blue-500 mb-3 md:mb-4" size={20} />
                     <p className="text-[10px] md:text-sm text-gray-500 font-bold uppercase tracking-wider">Total Orders</p>
-                    <p className="text-2xl md:text-3xl font-black">{customer.total_orders}</p>
+                    <p className="text-2xl md:text-3xl font-black">{totalOrders}</p>
                 </div>
 
                 <div className="bg-white p-5 md:p-6 rounded-3xl border border-gray-100 shadow-sm">
                     <Calendar className="text-green-500 mb-3 md:mb-4" size={20} />
                     <p className="text-[10px] md:text-sm text-gray-500 font-bold uppercase tracking-wider">Last Order</p>
                     <p className="text-lg md:text-xl font-bold">
-                        {new Date(customer.last_order_at).toLocaleDateString()}
+                        {lastOrderDate ? new Date(lastOrderDate).toLocaleDateString() : 'N/A'}
                     </p>
                 </div>
             </div>

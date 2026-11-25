@@ -67,15 +67,27 @@ export default async function AdminDashboard(props: {
         .order('created_at', { ascending: false })
         .range(from, to) as { data: Order[] | null; count: number | null };
 
-    // 3. Fetch Top Customers (Safely handle empty tables)
-    const { data: topCustomers } = await supabase
-        .from('customers')
-        .select('email, total_spent')
-        .order('total_spent', { ascending: false })
-        .limit(5) as { data: Customer[] | null };
+    // 3. Fetch Real Orders for Aggregate Analytics (Top Customers & Real Total Revenue)
+    const { data: allOrders } = await supabase
+        .from('orders')
+        .select('email, customer_name, total_amount, status');
 
-    // Calculation Fix: Ensure total_amount is treated as a number
-    const totalRevenue = orders?.reduce((acc, order) => acc + (Number(order.total_amount) || 0), 0) || 0;
+    // Aggregate spend per customer from orders
+    const customerSpendMap = new Map<string, number>();
+    (allOrders || []).forEach((ord) => {
+        if (!ord.email) return;
+        const normalizedEmail = ord.email.trim().toLowerCase();
+        const currentTotal = customerSpendMap.get(normalizedEmail) || 0;
+        customerSpendMap.set(normalizedEmail, currentTotal + (Number(ord.total_amount) || 0));
+    });
+
+    const topCustomers: Customer[] = Array.from(customerSpendMap.entries())
+        .map(([email, total_spent]) => ({ email, total_spent }))
+        .sort((a, b) => b.total_spent - a.total_spent)
+        .slice(0, 5);
+
+    // Calculation Fix: Ensure total_amount is treated as a number across all real orders
+    const totalRevenue = (allOrders || []).reduce((acc, order) => acc + (Number(order.total_amount) || 0), 0);
     const totalPages = Math.ceil((count || 0) / pageSize);
 
     return (
