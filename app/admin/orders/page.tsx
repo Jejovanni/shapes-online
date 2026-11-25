@@ -38,7 +38,7 @@ export default async function AdminDashboard(props: {
     searchParams: Promise<{ page?: string; search?: string }>;
 }) {
     const searchParams = await props.searchParams;
-    const searchTerm = searchParams.search || ''; 
+    const searchTerm = searchParams.search || '';
     const currentPage = parseInt(searchParams.page || '1');
     const pageSize = 20;
     const from = (currentPage - 1) * pageSize;
@@ -95,8 +95,8 @@ export default async function AdminDashboard(props: {
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 md:mb-10">
                 <div>
-                    <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Shapes Admin</h1>
-                    <p className="text-gray-500 text-xs md:text-sm">Manual verification workflow active</p>
+                    <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Shapes Lagos Admin</h1>
+                    <p className="text-gray-500 text-xs md:text-sm">Manual verification workflow</p>
                 </div>
                 <LogoutButton />
             </div>
@@ -199,9 +199,8 @@ export default async function AdminDashboard(props: {
                                         )}
                                     </td>
                                     <td className="p-4 md:p-5">
-                                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-black tracking-widest uppercase ${
-                                            order.status === 'verified' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
-                                        }`}>
+                                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-black tracking-widest uppercase ${order.status === 'verified' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
+                                            }`}>
                                             {order.status === 'verified' && <CheckCircle size={10} />}
                                             {order.status}
                                         </span>

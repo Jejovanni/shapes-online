@@ -107,7 +107,7 @@ export default function AdminLogin() {
                 </form>
 
                 <p className="text-center text-gray-400 text-[10px] mt-8 uppercase tracking-widest font-bold">
-                    Shapes &copy; 2026
+                    Shapes Lagos &copy; 2026
                 </p>
             </div>
         </div>
