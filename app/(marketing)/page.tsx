@@ -85,9 +85,12 @@ export default function HeroSection() {
                 <Link href="#shop" className="inline-flex items-center justify-center rounded-xl transition-colors duration-300 font-bold whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 text-lg sm:text-xl px-8 sm:px-10 py-4 sm:py-5 h-auto w-full sm:w-auto bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-600 hover:to-pink-700 shadow-2xl text-white active:scale-95">
                   Shop Now
                 </Link>
-                {/* <Button size="xl" variant="outline" className="w-full sm:w-auto text-base sm:text-lg border-white/30 text-white backdrop-blur-sm hover:bg-pink-500 hover:border-pink-500">
+                <Link
+                  href="/results"
+                  className="inline-flex items-center justify-center rounded-xl transition-all duration-300 font-bold whitespace-nowrap border border-white/30 text-white backdrop-blur-sm hover:bg-pink-500 hover:border-pink-500 text-lg sm:text-xl px-8 sm:px-10 py-4 sm:py-5 h-auto w-full sm:w-auto active:scale-95 shadow-lg"
+                >
                   See Results
-                </Button> */}
+                </Link>
               </div>
             </div>
           </div>
